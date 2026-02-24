@@ -1,0 +1,29 @@
+{
+  "name": "mthds-skills",
+  "owner": {
+    "name": "Pipelex staff",
+    "email": "oss@pipelex.com"
+  },
+  "metadata": {
+    "description": "Skills for building, running, validating, and editing AI methods following the MTHDS standard.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "mthds",
+      "description": "Skills for building, running, validating, and editing AI methods following the MTHDS standard.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/build",
+        "./skills/check",
+        "./skills/edit",
+        "./skills/explain",
+        "./skills/fix",
+        "./skills/run",
+        "./skills/inputs",
+        "./skills/pkg"
+      ]
+    }
+  ]
+}
