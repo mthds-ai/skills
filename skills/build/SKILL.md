@@ -260,7 +260,7 @@ mthds-agent pipelex validate mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pip
 mthds-agent pipelex inputs mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
 
 # Dry run (directory mode: auto-detects bundle, inputs, library dir)
-mthds-agent pipelex run mthds-wip/pipeline_01/ --dry-run --mock-inputs
+mthds-agent pipelex run pipe mthds-wip/pipeline_01/ --dry-run --mock-inputs
 ```
 
 Fix any validation errors and re-validate. If validation fails unexpectedly or errors are unclear, re-run with `--log-level debug` for additional context:

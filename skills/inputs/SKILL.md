@@ -299,7 +299,7 @@ First, create an input file (e.g., `<output_dir>/image_request.json`):
 
 Then run:
 ```bash
-mthds-agent pipelex run pipelex/builder/synthetic_inputs/synthesize_image.mthds --inputs <output_dir>/image_request.json
+mthds-agent pipelex run pipe pipelex/builder/synthetic_inputs/synthesize_image.mthds --inputs <output_dir>/image_request.json
 ```
 
 **Image Categories:**
@@ -484,10 +484,10 @@ Then offer to run:
 
 ```bash
 # Dry run with the prepared inputs (directory mode auto-detects bundle, inputs, library dir)
-mthds-agent pipelex run <bundle-dir>/ --dry-run
+mthds-agent pipelex run pipe <bundle-dir>/ --dry-run
 
 # Full run (uses actual AI/extraction models)
-mthds-agent pipelex run <bundle-dir>/
+mthds-agent pipelex run pipe <bundle-dir>/
 ```
 
 ---

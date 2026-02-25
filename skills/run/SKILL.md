@@ -15,10 +15,10 @@ Execute MTHDS method bundles and interpret their JSON output.
 
 | Target | Command |
 |--------|---------|
-| Pipeline directory (recommended) | `mthds-agent pipelex run <bundle-dir>/` |
-| Specific pipe in a directory | `mthds-agent pipelex run <bundle-dir>/ --pipe my_pipe` |
-| Bundle file directly | `mthds-agent pipelex run bundle.mthds -L <bundle-dir>/` |
-| Pipe by code from library | `mthds-agent pipelex run my_pipe` |
+| Pipeline directory (recommended) | `mthds-agent pipelex run pipe <bundle-dir>/` |
+| Specific pipe in a directory | `mthds-agent pipelex run pipe <bundle-dir>/ --pipe my_pipe` |
+| Bundle file directly | `mthds-agent pipelex run pipe bundle.mthds -L <bundle-dir>/` |
+| Pipe by code from library | `mthds-agent pipelex run pipe my_pipe` |
 
 > **Directory mode** (recommended): Pass the pipeline directory as target. The CLI auto-detects `bundle.mthds`, `inputs.json`, and sets `-L` automatically — no need to specify them explicitly. This also avoids namespace collisions with other bundles.
 
@@ -95,11 +95,12 @@ After the dry run, offer the user these options:
 
 | Mode | Command | Use When |
 |------|---------|----------|
-| **Dry run + mock inputs** | `mthds-agent pipelex run <bundle-dir>/ --dry-run --mock-inputs` | Quick structural validation, no real data needed, or inputs not ready |
-| **Dry run with real inputs** | `mthds-agent pipelex run <bundle-dir>/ --dry-run` | Validate input shapes without making API calls (auto-detects `inputs.json`) |
-| **Full run** | `mthds-agent pipelex run <bundle-dir>/` | Production execution (auto-detects `inputs.json`) |
-| **Full run inline** | `mthds-agent pipelex run <bundle-dir>/ --inputs '{"theme": ...}'` | Quick execution with inline JSON inputs |
-| **Full run without graph** | `mthds-agent pipelex run <bundle-dir>/ --no-graph` | Execute without generating graph visualization |
+| **Dry run + mock inputs** | `mthds-agent pipelex run pipe <bundle-dir>/ --dry-run --mock-inputs` | Quick structural validation, no real data needed, or inputs not ready |
+| **Dry run with real inputs** | `mthds-agent pipelex run pipe <bundle-dir>/ --dry-run` | Validate input shapes without making API calls (auto-detects `inputs.json`) |
+| **Full run** | `mthds-agent pipelex run pipe <bundle-dir>/` | Production execution (auto-detects `inputs.json`) |
+| **Full run inline** | `mthds-agent pipelex run pipe <bundle-dir>/ --inputs '{"theme": ...}'` | Quick execution with inline JSON inputs |
+| **Full run without graph** | `mthds-agent pipelex run pipe <bundle-dir>/ --no-graph` | Execute without generating graph visualization |
+| **Full run with memory** | `mthds-agent pipelex run pipe <bundle-dir>/ --with-memory` | When piping output to another method |
 
 > **Graph by default**: Execution graphs (`live_run.html` / `dry_run.html`) are now generated automatically. Use `--no-graph` to disable.
 
@@ -109,19 +110,37 @@ The `--inputs` flag accepts both file paths and inline JSON. The CLI auto-detect
 
 ```bash
 # Inline JSON
-mthds-agent pipelex run <bundle-dir>/ --inputs '{"theme": {"concept": "native.Text", "content": {"text": "nature"}}}'
+mthds-agent pipelex run pipe <bundle-dir>/ --inputs '{"theme": {"concept": "native.Text", "content": {"text": "nature"}}}'
 
 # File path (auto-detected in directory mode)
-mthds-agent pipelex run <bundle-dir>/
+mthds-agent pipelex run pipe <bundle-dir>/
 ```
 
 ### Step 4: Present Results
 
 After a successful run, **always show the actual output to the user** — never just summarize what fields exist.
 
+#### Output format modes
+
+The CLI has two output modes:
+
+- **Compact (default)**: stdout is the concept's structured JSON directly — no envelope, no `success` wrapper. This is the primary output of the method's main concept. Parse the JSON directly for field access.
+- **With memory (`--with-memory`)**: stdout has `main_stuff` (with `json`, `markdown`, `html` renderings) + `working_memory` (all named stuffs and aliases). Use this when piping output to another method.
+
+The `output_file` and `graph_files` are written to disk as side effects (paths appear in logs/stderr), not in compact stdout.
+
 #### 4a. Determine what to show
 
-The output structure depends on the pipe architecture:
+**In compact mode** (default), the output is the concept JSON directly. Show the fields to the user:
+
+```json
+{
+  "clauses": [...],
+  "overall_risk": "high"
+}
+```
+
+**In `--with-memory` mode**, the output structure depends on the pipe architecture:
 
 ```
 if main_stuff is non-empty (not {} or null):
@@ -141,11 +160,15 @@ else:
 
 #### 4b. Show the output content
 
-**When `main_stuff` is present** (most pipe types):
+**In compact mode**: show the JSON fields directly. For structured concepts, format for readability.
+
+**In `--with-memory` mode when `main_stuff` is present** (most pipe types):
+
 - Show `main_stuff.markdown` directly — this is the human-readable rendering. Display it as-is so the user sees the full output.
 - For structured concepts with fields, also show `main_stuff.json` formatted for readability.
 
-**When `main_stuff` is empty** (PipeParallel without `combined_output`):
+**In `--with-memory` mode when `main_stuff` is empty** (PipeParallel without `combined_output`):
+
 - Iterate `working_memory.root` and present each named result.
 - For each entry, show the `content` field with its key as a label.
 - Example: "**french_translation**: Bonjour le monde" / "**spanish_translation**: Hola mundo"
@@ -155,14 +178,12 @@ else:
 #### 4c. Output file
 
 - The CLI automatically saves the full JSON output next to the bundle (`live_run.json` or `dry_run.json`).
-- Show the saved path from `output_file` in the response so the user can Cmd-click it:
-  `Output saved to <output_dir>/live_run.json` (or `dry_run.json` for dry runs)
+- The output file path appears in runtime logs (stderr), not in compact stdout.
 
 #### 4d. Present graph files
 
-- Check for `graph_files` in the response (present by default; absent only if `--no-graph` was used).
-- Show the file path so the user can open it:
-  `Execution graph: <output_dir>/live_run.html` (or `dry_run.html` for dry runs)
+- Graph visualizations are generated by default (`live_run.html` / `dry_run.html`). Use `--no-graph` to disable.
+- The graph file path appears in runtime logs (stderr), not in compact stdout.
 
 #### 4e. Mention intermediate results
 
@@ -179,7 +200,7 @@ else:
 When encountering runtime errors, re-run with `--log-level debug` for additional context:
 
 ```bash
-mthds-agent --log-level debug pipelex run <bundle-dir>/ --inputs data.json
+mthds-agent --log-level debug pipelex run pipe <bundle-dir>/ --inputs data.json
 ```
 
 For all error types and recovery strategies, see [Error Handling Reference](../shared/error-handling.md).
@@ -189,21 +210,33 @@ For all error types and recovery strategies, see [Error Handling Reference](../s
 Execution graph visualizations are generated by default alongside the run output. Use `--no-graph` to disable.
 
 ```bash
-mthds-agent pipelex run <bundle-dir>/
+mthds-agent pipelex run pipe <bundle-dir>/
 ```
 
-The success JSON includes a `graph_files` field with the path to the graph HTML file, named based on the run mode (`live_run.html` for full runs, `dry_run.html` for dry runs):
+Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the bundle. Their paths appear in runtime logs on stderr, not in compact stdout. When using `--with-memory`, `graph_files` is included in the returned JSON envelope.
 
-```json
-{
-  "success": true,
-  "pipe_code": "main_pipe",
-  "graph_files": {
-    "graph_html": "<output_dir>/live_run.html"
-  },
-  ...
-}
+### Piping Methods
+
+The run command accepts piped JSON on stdin when `--inputs` is not provided. This enables chaining methods:
+
+```bash
+mthds-agent pipelex run method extract-terms --inputs data.json --with-memory \
+  | mthds-agent pipelex run method assess-risk --with-memory \
+  | mthds-agent pipelex run method generate-report
 ```
+
+When methods are installed as CLI shims, the same chain is:
+
+```bash
+extract-terms --inputs data.json --with-memory \
+  | assess-risk --with-memory \
+  | generate-report
+```
+
+- Use `--with-memory` on intermediate steps to pass the full working memory envelope.
+- The final step omits `--with-memory` to produce compact output.
+- `--inputs` always overrides stdin when both are present.
+- Upstream stuff names are matched against downstream input names. Method authors should name their outputs to match the downstream's expected input names.
 
 ## Reference
 
