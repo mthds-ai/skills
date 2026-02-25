@@ -65,21 +65,47 @@ Use the /build skill for a guided 10-phase process: requirements → plan → co
 
 ### Success Format
 
-All `mthds-agent` commands output JSON to **stdout** on success:
+The `mthds-agent pipelex run` command has two output modes:
+
+**Compact (default)**: The concept's structured JSON is emitted directly — no envelope, no metadata:
 
 ```json
 {
-  "success": true,
-  "pipe_code": "my_pipe",
-  ...command-specific fields...
+  "clauses": [
+    { "title": "Non-Compete", "risk_level": "high" },
+    { "title": "Termination", "risk_level": "medium" }
+  ],
+  "overall_risk": "high"
 }
 ```
+
+This works directly with `jq` and other JSON tools.
+
+**With memory (`--with-memory`)**: The full working memory envelope for piping to another method:
+
+```json
+{
+  "main_stuff": {
+    "json": "<concept as JSON string>",
+    "markdown": "<concept as Markdown string>",
+    "html": "<concept as HTML string>"
+  },
+  "working_memory": {
+    "root": { ... },
+    "aliases": { ... }
+  }
+}
+```
+
+Other `mthds-agent` commands (validate, inputs, etc.) continue to output their existing JSON format with `"success": true`.
 
 ### Error Handling
 
 For all error types, recovery strategies, and error domains, see [Error Handling Reference](error-handling.md).
 
-## Inline JSON for Inputs
+## Inputs
+
+### `--inputs` Flag
 
 The `--inputs` flag on `mthds-agent pipelex run` accepts **both** file paths and inline JSON. The CLI auto-detects: if the value starts with `{`, it is parsed as JSON directly.
 
@@ -92,6 +118,33 @@ mthds-agent pipelex run bundle.mthds --inputs '{"theme": {"concept": "native.Tex
 ```
 
 Inline JSON is the fastest path for agents — skip file creation for simple inputs.
+
+### stdin (Piped Input)
+
+When `--inputs` is not provided and stdin is not a TTY (i.e., data is piped), JSON is read from stdin:
+
+```bash
+echo '{"text": {"concept": "native.Text", "content": {"text": "hello"}}}' | mthds-agent pipelex run my-method/
+```
+
+**`--inputs` always takes priority** over stdin. If both are present, stdin is ignored.
+
+When stdin contains a `working_memory` key (from upstream `--with-memory` output), the runtime automatically extracts stuffs from the working memory and resolves them as inputs.
+
+## Piping Methods
+
+Methods can be chained via Unix pipes using `--with-memory` to pass the full working memory between steps:
+
+```bash
+mthds-agent pipelex run extract-terms/ --inputs data.json --with-memory \
+  | mthds-agent pipelex run assess-risk/ --with-memory \
+  | mthds-agent pipelex run generate-report/
+```
+
+- **`--with-memory`** on intermediate steps emits the full envelope (`main_stuff` + `working_memory`).
+- The **final step** omits `--with-memory` to produce compact output (concept JSON only).
+- **Single-input shortcut**: if the downstream method declares one input, it auto-binds to the upstream's main output.
+- **Multi-input**: upstream stuff names are matched against downstream input names.
 
 ## Working Directory Convention
 
@@ -170,7 +223,7 @@ The success JSON includes a `graph_files` field with the path to the graph HTML 
 
 | Command | Purpose | Example |
 |---------|---------|---------|
-| `mthds-agent pipelex run` | Execute a pipeline | `mthds-agent pipelex run <bundle-dir>/` |
+| `mthds-agent pipelex run` | Execute a pipeline (compact output by default; use `--with-memory` for full envelope) | `mthds-agent pipelex run <bundle-dir>/` |
 | `mthds-agent pipelex validate` | Validate a bundle or pipe | `mthds-agent pipelex validate bundle.mthds` |
 | `mthds-agent pipelex inputs` | Generate example input JSON | `mthds-agent pipelex inputs bundle.mthds` |
 | `mthds-agent pipelex concept` | Structure a concept from JSON spec | `mthds-agent pipelex concept --spec '{...}'` |
