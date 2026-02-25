@@ -17,12 +17,8 @@ if [[ -z "$FILE_PATH" || "$FILE_PATH" != *.mthds || ! -f "$FILE_PATH" ]]; then
   exit 0
 fi
 
-# --- Discover CLI prefix (direct or via npx) ---
-if command -v mthds-agent &>/dev/null; then
-  RUN=""
-elif command -v npx &>/dev/null; then
-  RUN="npx "
-else
+# --- Require mthds-agent on PATH ---
+if ! command -v mthds-agent &>/dev/null; then
   exit 0
 fi
 
@@ -34,7 +30,7 @@ trap 'rm -f "$TMPOUT" "$TMPERR"' EXIT
 # STAGE 1: mthds-agent plxt lint — TOML/schema-level linting
 # =====================================================================
 LINT_EXIT=0
-${RUN}mthds-agent plxt lint "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || LINT_EXIT=$?
+mthds-agent plxt lint "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || LINT_EXIT=$?
 
 if [[ "$LINT_EXIT" -ne 0 ]]; then
   LINT_OUTPUT=$(cat "$TMPERR")
@@ -50,7 +46,7 @@ fi
 # =====================================================================
 # STAGE 2: mthds-agent plxt fmt — auto-format the file in-place (lint passed)
 # =====================================================================
-${RUN}mthds-agent plxt fmt "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || true
+mthds-agent plxt fmt "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || true
 
 # =====================================================================
 # STAGE 3: mthds-agent pipelex validate — semantic validation
@@ -58,7 +54,7 @@ ${RUN}mthds-agent plxt fmt "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || true
 PARENT_DIR=$(dirname "$FILE_PATH")
 
 EXIT_CODE=0
-${RUN}mthds-agent pipelex validate "$FILE_PATH" -L "$PARENT_DIR/" >"$TMPOUT" 2>"$TMPERR" || EXIT_CODE=$?
+mthds-agent pipelex validate "$FILE_PATH" -L "$PARENT_DIR/" >"$TMPOUT" 2>"$TMPERR" || EXIT_CODE=$?
 
 # --- Parse results ---
 if [[ "$EXIT_CODE" -eq 0 ]]; then

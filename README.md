@@ -29,7 +29,7 @@ The `mthds-agent` CLI must be available in your environment:
 mthds-agent --version
 ```
 
-If not installed, install the `mthds` npm package: `npm install -g mthds` or use `npx mthds-agent`. For details, see [prerequisites](skills/shared/prerequisites.md).
+If not installed, install the `mthds` npm package: `npm install -g mthds`. For details, see [prerequisites](skills/shared/prerequisites.md).
 
 ## Project Structure
 
