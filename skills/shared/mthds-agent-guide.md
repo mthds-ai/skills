@@ -124,7 +124,7 @@ Inline JSON is the fastest path for agents — skip file creation for simple inp
 When `--inputs` is not provided and stdin is not a TTY (i.e., data is piped), JSON is read from stdin:
 
 ```bash
-echo '{"text": {"concept": "native.Text", "content": {"text": "hello"}}}' | mthds-agent pipelex run pipe my-method/
+echo '{"text": {"concept": "native.Text", "content": {"text": "hello"}}}' | mthds-agent pipelex run pipe <bundle-dir>/
 ```
 
 **`--inputs` always takes priority** over stdin. If both are present, stdin is ignored.
@@ -136,9 +136,17 @@ When stdin contains a `working_memory` key (from upstream `--with-memory` output
 Methods can be chained via Unix pipes using `--with-memory` to pass the full working memory between steps:
 
 ```bash
-mthds-agent pipelex run pipe extract-terms/ --inputs data.json --with-memory \
-  | mthds-agent pipelex run pipe assess-risk/ --with-memory \
-  | mthds-agent pipelex run pipe generate-report/
+mthds-agent pipelex run method extract-terms --inputs data.json --with-memory \
+  | mthds-agent pipelex run method assess-risk --with-memory \
+  | mthds-agent pipelex run method generate-report
+```
+
+When methods are installed as CLI shims, the same chain is:
+
+```bash
+extract-terms --inputs data.json --with-memory \
+  | assess-risk --with-memory \
+  | generate-report
 ```
 
 - **`--with-memory`** on intermediate steps emits the full envelope (`main_stuff` + `working_memory`).

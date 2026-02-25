@@ -220,9 +220,17 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 The run command accepts piped JSON on stdin when `--inputs` is not provided. This enables chaining methods:
 
 ```bash
-mthds-agent pipelex run pipe extract-terms/ --inputs data.json --with-memory \
-  | mthds-agent pipelex run pipe assess-risk/ --with-memory \
-  | mthds-agent pipelex run pipe generate-report/
+mthds-agent pipelex run method extract-terms --inputs data.json --with-memory \
+  | mthds-agent pipelex run method assess-risk --with-memory \
+  | mthds-agent pipelex run method generate-report
+```
+
+When methods are installed as CLI shims, the same chain is:
+
+```bash
+extract-terms --inputs data.json --with-memory \
+  | assess-risk --with-memory \
+  | generate-report
 ```
 
 - Use `--with-memory` on intermediate steps to pass the full working memory envelope.
