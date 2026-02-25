@@ -2,6 +2,8 @@
 
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills plugin for building, running, validating, and editing AI methods (.mthds bundle files) using the `mthds-agent` CLI.
 
+[MTHDS](https://mthds.ai) is an open standard for AI methods. Find methods on the hub: [MTHDS Hub](https://mthds.sh).
+
 ## Skills
 
 | Skill | Description |
