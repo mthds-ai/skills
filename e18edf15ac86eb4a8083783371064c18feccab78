@@ -1,0 +1,39 @@
+skills/inputs/SKILL.md
+  c496be46b859de97 12-41,121,360,689-692
+skills/run/SKILL.md
+  c496be46b859de97 221,258-261
+Makefile
+  c496be46b859de97 1-77
+skills/build/SKILL.md
+  c496be46b859de97 19-48,161,165,373-376
+skills/check/SKILL.md
+  c496be46b859de97 38,40,69-72
+skills/fix/SKILL.md
+  c496be46b859de97 40,60,124-127
+skills/explain/SKILL.md
+  c496be46b859de97 92-95
+skills/pkg/SKILL.md
+  c496be46b859de97 165-166
+skills/edit/SKILL.md
+  c496be46b859de97 12-41,95,124-128
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "e18edf15ac86eb4a8083783371064c18feccab78",
+  "prompts": {
+    "c496be46b859de97": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "66c290f4-cb30-491f-9a01-88dafb135033",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 208,
+      "total_deletions": 54,
+      "accepted_lines": 208,
+      "overriden_lines": 0
+    }
+  }
+}
