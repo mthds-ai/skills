@@ -16,7 +16,36 @@ Create new MTHDS bundles through an adaptive, phase-based approach. This skill g
 
 ## Mode Selection
 
-See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
+### How mode is determined
+
+1. **Explicit override**: If the user states a preference, always honor it:
+   - Automatic signals: "just do it", "go ahead", "automatic", "quick", "don't ask"
+   - Interactive signals: "walk me through", "help me", "guide me", "step by step", "let me decide"
+
+2. **Skill default**: Each skill defines its own default based on the nature of the task.
+
+3. **Request analysis**: If no explicit signal and no strong skill default, assess the request:
+   - Detailed, specific requirements → automatic
+   - Brief, ambiguous, or subjective → interactive
+
+### Mode behavior
+
+**Automatic mode:**
+- State assumptions briefly before proceeding
+- Make reasonable decisions at each step
+- Present the result when done
+- Pause only if a critical ambiguity could lead to wasted work
+
+**Interactive mode:**
+- Ask clarifying questions at the start
+- Present options at decision points
+- Confirm before proceeding at checkpoints
+- Allow the user to steer direction
+
+### Mode switching
+
+- If in automatic mode and the user asks a question or gives feedback → switch to interactive for the current phase
+- If in interactive mode and the user says "looks good, go ahead" or similar → switch to automatic for remaining phases
 
 **Default**: Automatic for simple-to-moderate methods. Interactive for complex multi-step methods or when the user's request is ambiguous.
 
@@ -129,11 +158,11 @@ For each concept, draft:
 - **Description**: What it represents
 - **Type**: Either `refines: NativeConcept` OR `structure: {...}`
 
-**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](../shared/mthds-reference.md#native-concepts)
+**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](references/mthds-reference.md#native-concepts)
 
 > **Note**: `Document` is the native concept for any document (PDF, Word, etc.). `Image` is for any image format (JPEG, PNG, etc.). File formats like "PDF" or "JPEG" are not concepts.
 
-Each native concept has accessible attributes (e.g., `Image` has `url`, `public_url`, `filename`, `caption`...; `Document` has `url`, `public_url`, `filename`...; `Page` has `text_and_images` and `page_view`). See [Native Content Types](../shared/native-content-types.md) for the full attribute reference — essential for `$var.field` prompts and `construct` blocks.
+Each native concept has accessible attributes (e.g., `Image` has `url`, `public_url`, `filename`, `caption`...; `Document` has `url`, `public_url`, `filename`...; `Page` has `text_and_images` and `page_view`). See [Native Content Types](references/native-content-types.md) for the full attribute reference — essential for `$var.field` prompts and `construct` blocks.
 
 **Concept naming rules**:
 - No adjectives: `Article` not `LongArticle`
@@ -341,10 +370,9 @@ After the command succeeds:
 
 ## Reference
 
-- [CLI Prerequisites](../shared/prerequisites.md) — supplementary reference (CLI check is inlined above in Step 0)
-- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
-- [Native Content Types](../shared/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
+- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](references/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
+- [Native Content Types](references/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
 - [Manual Build Phases](references/manual-build-phases.md) — read for detailed ASCII diagrams and CLI examples per phase
 - [Talents and Presets](references/talents-and-presets.md) — read when selecting model talents for pipe structuring

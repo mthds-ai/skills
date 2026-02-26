@@ -162,6 +162,5 @@ If `--directory` is omitted, commands default to the current working directory.
 
 ## Reference
 
-- [CLI Prerequisites](../shared/prerequisites.md) — supplementary reference (CLI check is inlined above in Step 0)
-- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details

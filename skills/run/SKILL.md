@@ -218,7 +218,7 @@ When encountering runtime errors, re-run with `--log-level debug` for additional
 mthds-agent --log-level debug pipelex run pipe <bundle-dir>/ --inputs data.json
 ```
 
-For all error types and recovery strategies, see [Error Handling Reference](../shared/error-handling.md).
+For all error types and recovery strategies, see [Error Handling Reference](references/error-handling.md).
 
 ### Execution Graphs
 
@@ -255,8 +255,7 @@ extract-terms --inputs data.json --with-memory \
 
 ## Reference
 
-- [CLI Prerequisites](../shared/prerequisites.md) — supplementary reference (CLI check is inlined above in Step 0)
-- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](../shared/mthds-reference.md) — read for .mthds syntax documentation
-- [Native Content Types](../shared/native-content-types.md) — read when interpreting pipeline outputs or preparing input JSON, to understand the attributes of each content type
+- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](references/mthds-reference.md) — read for .mthds syntax documentation
+- [Native Content Types](references/native-content-types.md) — read when interpreting pipeline outputs or preparing input JSON, to understand the attributes of each content type
