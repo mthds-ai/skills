@@ -408,10 +408,10 @@ When a bundle references pipes/concepts from other domains, use `--library-dir` 
 
 ```bash
 # Single file won't resolve cross-domain references
-mthds-agent pipelex validate my_bundle.mthds  # May fail
+mthds-agent pipelex validate pipe my_bundle.mthds  # May fail
 
 # Load entire directory to resolve references
-mthds-agent pipelex validate my_bundle.mthds --library-dir path/to/bundles/
+mthds-agent pipelex validate pipe my_bundle.mthds --library-dir path/to/bundles/
 ```
 
 ## Model Configuration

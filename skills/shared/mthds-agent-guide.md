@@ -20,7 +20,7 @@ These options apply to **all** `mthds-agent` commands and must appear **before**
 Examples:
 ```bash
 # Debug: additional context on what the CLI is doing
-mthds-agent --log-level debug pipelex validate bundle.mthds -L dir/
+mthds-agent --log-level debug pipelex validate pipe bundle.mthds -L dir/
 ```
 
 When diagnosing failures, use `--log-level debug` to get additional context — internal resolution steps, model routing details, and validation traces.
@@ -179,7 +179,7 @@ Pipelex loads `.mthds` files into a flat namespace. When multiple bundles exist 
 
 ```bash
 # Validate (isolated)
-mthds-agent pipelex validate mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
+mthds-agent pipelex validate pipe mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
 
 # Run (directory mode: auto-detects bundle, inputs, and -L)
 mthds-agent pipelex run pipe mthds-wip/pipeline_01/
@@ -200,7 +200,7 @@ mthds package init --directory mthds-wip/restaurant_presenter/
 mthds package validate --directory mthds-wip/restaurant_presenter/
 ```
 
-> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest — not `.mthds` bundle semantics. For bundle validation, use `mthds-agent pipelex validate`.
+> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest — not `.mthds` bundle semantics. For bundle validation, use `mthds-agent pipelex validate pipe`.
 
 ## Generating Visualizations
 
@@ -221,8 +221,8 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 | Command | Purpose | Example |
 |---------|---------|---------|
 | `mthds-agent pipelex run pipe` | Execute a pipeline (compact output by default; use `--with-memory` for full envelope) | `mthds-agent pipelex run pipe <bundle-dir>/` |
-| `mthds-agent pipelex validate` | Validate a bundle or pipe | `mthds-agent pipelex validate bundle.mthds` |
-| `mthds-agent pipelex inputs` | Generate example input JSON | `mthds-agent pipelex inputs bundle.mthds` |
+| `mthds-agent pipelex validate pipe` | Validate a bundle or pipe | `mthds-agent pipelex validate pipe bundle.mthds` |
+| `mthds-agent pipelex inputs pipe` | Generate example input JSON | `mthds-agent pipelex inputs pipe bundle.mthds` |
 | `mthds-agent pipelex concept` | Structure a concept from JSON spec | `mthds-agent pipelex concept --spec '{...}'` |
 | `mthds-agent pipelex pipe` | Structure a pipe from JSON spec | `mthds-agent pipelex pipe --spec '{"type": "PipeLLM", ...}'` |
 | `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts | `mthds-agent pipelex assemble --domain my_domain ...` |

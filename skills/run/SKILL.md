@@ -37,7 +37,7 @@ If `/run` is invoked without prior input preparation in this session, perform th
 Get the input schema for the target:
 
 ```bash
-mthds-agent pipelex inputs bundle.mthds
+mthds-agent pipelex inputs pipe bundle.mthds
 ```
 
 **Output:**
@@ -64,7 +64,7 @@ Fill in the `content` fields with actual values. For complex inputs, use the /in
 
 Before running, assess whether inputs are ready. This prevents runtime failures from placeholder values.
 
-**No inputs required**: If `mthds-agent pipelex inputs` returns an empty `inputs` object (`{}`), inputs are ready — skip to Step 3.
+**No inputs required**: If `mthds-agent pipelex inputs pipe` returns an empty `inputs` object (`{}`), inputs are ready — skip to Step 3.
 
 **Inputs required**: If inputs exist, check `inputs.json` for readiness:
 

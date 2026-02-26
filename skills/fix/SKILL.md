@@ -16,7 +16,7 @@ Automatically fix issues in MTHDS method bundles.
 Always use `-L` pointing to the bundle's own directory to avoid namespace collisions:
 
 ```bash
-mthds-agent pipelex validate <file>.mthds -L <bundle-directory>/
+mthds-agent pipelex validate pipe <file>.mthds -L <bundle-directory>/
 ```
 
 Parse the JSON output:
@@ -87,7 +87,7 @@ steps = [
 After applying fixes, re-validate:
 
 ```bash
-mthds-agent pipelex validate <file>.mthds -L <bundle-directory>/
+mthds-agent pipelex validate pipe <file>.mthds -L <bundle-directory>/
 ```
 
 Continue the fix-validate loop until `success: true` is returned. Some fixes reveal new issues — for example, fixing a `missing_input_variable` may expose an `input_stuff_spec_mismatch` on the newly added input.
@@ -95,7 +95,7 @@ Continue the fix-validate loop until `success: true` is returned. Some fixes rev
 If the fix-validate loop gets stuck or errors are unclear, re-run with `--log-level debug` for additional context:
 
 ```bash
-mthds-agent --log-level debug pipelex validate <file>.mthds -L <bundle-directory>/
+mthds-agent --log-level debug pipelex validate pipe <file>.mthds -L <bundle-directory>/
 ```
 
 ### Step 5: Report Results

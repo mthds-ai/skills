@@ -46,12 +46,12 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
 
 4. **Validate after editing**:
    ```bash
-   mthds-agent pipelex validate <file>.mthds -L <bundle-dir>/
+   mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
    ```
    If errors, see [Error Handling Reference](../shared/error-handling.md) for recovery strategies by error domain. Use /fix skill for automatic error resolution.
 
 5. **Regenerate inputs if needed**:
-   - If inputs changed, run `mthds-agent pipelex inputs <file>.mthds -L <bundle-dir>/`
+   - If inputs changed, run `mthds-agent pipelex inputs pipe <file>.mthds -L <bundle-dir>/`
    - Update existing inputs.json if present
 
 6. **Present completion**:

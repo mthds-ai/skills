@@ -3,7 +3,7 @@
 # Reads tool_input JSON from stdin, then runs (in order):
 #   1. mthds-agent plxt lint     — TOML/schema-level linting (blocks on errors)
 #   2. mthds-agent plxt fmt      — auto-format the file (only if lint passes)
-#   3. mthds-agent pipelex validate — semantic validation (blocks or warns)
+#   3. mthds-agent pipelex validate pipe — semantic validation (blocks or warns)
 # Passes silently if mthds-agent is not installed or file is not .mthds.
 
 set -euo pipefail
@@ -49,12 +49,12 @@ fi
 mthds-agent plxt fmt "$FILE_PATH" >"$TMPOUT" 2>"$TMPERR" || true
 
 # =====================================================================
-# STAGE 3: mthds-agent pipelex validate — semantic validation
+# STAGE 3: mthds-agent pipelex validate pipe — semantic validation
 # =====================================================================
 PARENT_DIR=$(dirname "$FILE_PATH")
 
 EXIT_CODE=0
-mthds-agent pipelex validate "$FILE_PATH" -L "$PARENT_DIR/" >"$TMPOUT" 2>"$TMPERR" || EXIT_CODE=$?
+mthds-agent pipelex validate pipe "$FILE_PATH" -L "$PARENT_DIR/" >"$TMPOUT" 2>"$TMPERR" || EXIT_CODE=$?
 
 # --- Parse results ---
 if [[ "$EXIT_CODE" -eq 0 ]]; then

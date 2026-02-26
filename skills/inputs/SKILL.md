@@ -55,7 +55,7 @@ The `/inputs` subdirectory is only created when there are actual data files to s
 Extract the input template from the method:
 
 ```bash
-mthds-agent pipelex inputs <bundle.mthds> -L <bundle-dir>/ [--pipe specific_pipe]
+mthds-agent pipelex inputs pipe <bundle.mthds> -L <bundle-dir>/ [--pipe specific_pipe]
 ```
 
 **Output format:**
@@ -556,7 +556,7 @@ mthds-agent pipelex run pipe <bundle-dir>/
 **Method**: Haiku pipeline expecting `theme: Text`
 
 ```bash
-mthds-agent pipelex inputs mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
+mthds-agent pipelex inputs pipe mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
 ```
 
 Save the `inputs` from the output directly to `mthds-wip/pipeline_01/inputs.json`.

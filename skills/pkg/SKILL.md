@@ -114,7 +114,7 @@ Target a specific package:
 mthds package validate <target> --directory <pkg-dir>
 ```
 
-> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate` (see /check skill).
+> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate pipe` (see /check skill).
 
 ## The `--directory` option
 
