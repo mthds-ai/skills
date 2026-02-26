@@ -1,5 +1,5 @@
 ---
-name: explain
+name: mthds-explain
 description: Explain and document MTHDS bundles. Use when user says "what does this pipeline do?", "explain this workflow", "explain this method", "walk me through this .mthds file", "describe the flow", "document this pipeline", "how does this work?", or wants to understand an existing MTHDS method bundle.
 ---
 
@@ -65,7 +65,7 @@ mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
 
 ### Step 7: Optional — Visual Graph
 
-For an interactive visual graph, suggest running the method with `/run` using real inputs:
+For an interactive visual graph, suggest running the method with `/mthds-run` using real inputs:
 ```bash
 mthds-agent pipelex run pipe <bundle-dir>/
 ```

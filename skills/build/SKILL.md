@@ -1,5 +1,5 @@
 ---
-name: build
+name: mthds-build
 description: Build new AI method from scratch using the MTHDS standard (.mthds bundle files). Use when user says "create a pipeline", "build a workflow", "new .mthds file", "make a method", "design a pipe", or wants to create any new method from scratch. Guides the user through a 10-phase construction process.
 ---
 
@@ -58,8 +58,8 @@ For the general case, scan `mthds-wip/` and any other directories containing `.m
 
 **Handling each choice**:
 - **Start fresh**: Proceed with the build as normal (automatic or interactive path below).
-- **Use the existing method**: End the build. Remind the user they can run it with `/run` and point them to its `inputs.json` if available.
-- **Build upon it**: Switch to the /edit skill, framing the task as an extension — ask the user what additional processing they want to add (e.g., a preprocessing step before the main pipe, a postprocessing step after, or additional parallel branches). Pass the existing `.mthds` file path to the edit workflow.
+- **Use the existing method**: End the build. Remind the user they can run it with `/mthds-run` and point them to its `inputs.json` if available.
+- **Build upon it**: Switch to the /mthds-edit skill, framing the task as an extension — ask the user what additional processing they want to add (e.g., a preprocessing step before the main pipe, a postprocessing step after, or additional parallel branches). Pass the existing `.mthds` file path to the edit workflow.
 
 ---
 
@@ -291,13 +291,13 @@ After the command succeeds:
 1. **Input template**: Show the `inputs` JSON from the inputs command output. Save it to `<output_dir>/inputs.json` for the user to fill in.
 
 2. **Next steps — try it now**: If the method requires inputs, the saved `inputs.json` still contains placeholder values, so suggest a dry run first:
-   > To try this method right now, use /run or from the terminal:
+   > To try this method right now, use /mthds-run or from the terminal:
    > ```
    > mthds run pipe <output_dir>/ --dry-run --mock-inputs
    > ```
 
 3. **Next steps — run with real data**: Explain how to prepare real inputs, then run for real:
-   > To run with real data, use /inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
+   > To run with real data, use /mthds-inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
    > ```
    > mthds run pipe <output_dir>/
    > ```

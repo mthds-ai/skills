@@ -1,6 +1,6 @@
 ---
-name: fix
-description: Fix issues in MTHDS bundles. Use when user says "fix this workflow", "fix this method", "repair validation errors", "the pipeline is broken", "fix the .mthds file", after /check found issues, or when validation reports errors. Automatically applies fixes and re-validates in a loop.
+name: mthds-fix
+description: Fix issues in MTHDS bundles. Use when user says "fix this workflow", "fix this method", "repair validation errors", "the pipeline is broken", "fix the .mthds file", after /mthds-check found issues, or when validation reports errors. Automatically applies fixes and re-validates in a loop.
 ---
 
 # Fix MTHDS bundles

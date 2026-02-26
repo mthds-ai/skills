@@ -27,7 +27,7 @@ When diagnosing failures, use `--log-level debug` to get additional context — 
 
 ## Building Methods
 
-Use the /build skill for a guided 10-phase process: requirements → plan → concepts → structure → flow → review → pipes → assemble → validate → deliver. Refine with /edit and /fix if the result needs adjustments.
+Use the /mthds-build skill for a guided 10-phase process: requirements → plan → concepts → structure → flow → review → pipes → assemble → validate → deliver. Refine with /mthds-edit and /mthds-fix if the result needs adjustments.
 
 ## The Iterative Development Loop
 
@@ -43,7 +43,7 @@ Use the /build skill for a guided 10-phase process: requirements → plan → co
                ▼                                       │
     ┌──────────────────────┐     ┌──────────────┐      │
     │  Validate            │────►│  Fix errors  │──────┘
-    │  mthds-agent pipelex │ err │  /fix skill  │
+    │  mthds-agent pipelex │ err │  /mthds-fix  │
     │  validate file.mthds │     └──────────────┘
     └──────────┬───────────┘
                │ ok

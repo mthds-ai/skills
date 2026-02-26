@@ -1,5 +1,5 @@
 ---
-name: pkg
+name: mthds-pkg
 description: Manage MTHDS packages — initialize, add dependencies, lock, install, and update. Use when user says "init package", "add dependency", "install dependencies", "lock deps", "update packages", "set up METHODS.toml", "manage packages", "mthds init", or wants to manage MTHDS package dependencies.
 ---
 
@@ -114,7 +114,7 @@ Target a specific package:
 mthds package validate <target> --directory <pkg-dir>
 ```
 
-> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate pipe` (see /check skill).
+> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate pipe` (see /mthds-check skill).
 
 ## The `--directory` option
 

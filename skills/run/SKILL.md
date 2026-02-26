@@ -1,5 +1,5 @@
 ---
-name: run
+name: mthds-run
 description: Run MTHDS methods and interpret results. Use when user says "run this pipeline", "execute the workflow", "execute the method", "test this .mthds file", "try it out", "see the output", "dry run", or wants to execute any MTHDS method bundle and see its output.
 ---
 
@@ -26,13 +26,13 @@ Execute MTHDS method bundles and interpret their JSON output.
 
 #### Fast path — inputs just prepared
 
-If inputs were already prepared during this conversation — via `/inputs` (user-data, synthetic, or mixed strategy), or by manually assembling `inputs.json` with real values earlier in this session — skip the schema fetch and readiness check. The inputs are ready. Proceed directly to Step 3 with a normal run.
+If inputs were already prepared during this conversation — via `/mthds-inputs` (user-data, synthetic, or mixed strategy), or by manually assembling `inputs.json` with real values earlier in this session — skip the schema fetch and readiness check. The inputs are ready. Proceed directly to Step 3 with a normal run.
 
-This applies when you just wrote or saw `inputs.json` being written with real content values. It does NOT apply after `/build` (which saves a placeholder template) or after `/inputs` with the template strategy.
+This applies when you just wrote or saw `inputs.json` being written with real content values. It does NOT apply after `/mthds-build` (which saves a placeholder template) or after `/mthds-inputs` with the template strategy.
 
 #### Full check — cold start
 
-If `/run` is invoked without prior input preparation in this session, perform the full readiness check:
+If `/mthds-run` is invoked without prior input preparation in this session, perform the full readiness check:
 
 Get the input schema for the target:
 
@@ -58,7 +58,7 @@ mthds-agent pipelex inputs pipe bundle.mthds
 }
 ```
 
-Fill in the `content` fields with actual values. For complex inputs, use the /inputs skill.
+Fill in the `content` fields with actual values. For complex inputs, use the /mthds-inputs skill.
 
 #### Input Readiness Check
 
@@ -87,7 +87,7 @@ Default to `--dry-run --mock-inputs` and inform the user:
 > "The inputs for this pipeline contain placeholder values (not real data). I'll do a dry run with mock inputs to validate the pipeline structure."
 
 After the dry run, offer the user these options:
-- **Prepare real inputs** — use `/inputs` to fill in actual values, then re-run
+- **Prepare real inputs** — use `/mthds-inputs` to fill in actual values, then re-run
 - **Provide files** — if the pipeline expects file inputs (documents, images), ask the user to supply file paths
 - **Keep dry run** — accept the dry-run result as-is
 

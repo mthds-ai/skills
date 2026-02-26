@@ -1,5 +1,5 @@
 ---
-name: inputs
+name: mthds-inputs
 description: Prepare inputs for MTHDS methods. Use when user says "prepare inputs", "create inputs", "use my files", "generate test data", "template", "synthesize inputs", "mock inputs", "I have a PDF/image/document to use", "make sample data", or wants to create inputs.json for running a .mthds pipeline. Handles user-provided files, synthetic data generation, placeholder templates, and mixed approaches. Defaults to automatic mode.
 ---
 
@@ -20,7 +20,7 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
 | User provides file paths, folder paths, or mentions "my data" / "this file" / "use these images" / "here's my PDF" | **User Data** (or Mixed if some inputs remain unfilled) |
 | User says "test data" / "generate inputs" / "synthesize" / "fake data" / "sample data" | **Synthetic** |
 | User says "template" / "schema" / "placeholder" / "what inputs does it need?" | **Template** |
-| No clear signal (e.g., called after `/build` with no further context) | **Template**, then offer to populate |
+| No clear signal (e.g., called after `/mthds-build` with no further context) | **Template**, then offer to populate |
 
 **Interactive additions**: Ask about:
 - Which user files map to which inputs (when ambiguous)
@@ -96,7 +96,7 @@ The fastest path. Produces a placeholder `inputs.json` that the user can fill in
 1. Take the `inputs` object from Step 2's output
 2. Save it to `<output_dir>/inputs.json` (next to `bundle.mthds`)
 3. Report the saved file path and show the template content
-4. Offer: "To populate this with realistic test data, re-run /inputs and ask for synthetic data. Or provide your own files."
+4. Offer: "To populate this with realistic test data, re-run /mthds-inputs and ask for synthetic data. Or provide your own files."
 
 ---
 

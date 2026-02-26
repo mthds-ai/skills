@@ -1,5 +1,5 @@
 ---
-name: edit
+name: mthds-edit
 description: Edit existing MTHDS bundles (.mthds files). Use when user says "change this pipe", "update the prompt", "rename this concept", "add a step", "remove this pipe", "modify the workflow", "modify the method", "refactor this pipeline", or wants any modification to an existing .mthds file. Supports automatic mode for clear changes and interactive mode for complex modifications.
 ---
 
@@ -48,7 +48,7 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
    ```bash
    mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
    ```
-   If errors, see [Error Handling Reference](../shared/error-handling.md) for recovery strategies by error domain. Use /fix skill for automatic error resolution.
+   If errors, see [Error Handling Reference](../shared/error-handling.md) for recovery strategies by error domain. Use /mthds-fix skill for automatic error resolution.
 
 5. **Regenerate inputs if needed**:
    - If inputs changed, run `mthds-agent pipelex inputs pipe <file>.mthds -L <bundle-dir>/`
@@ -57,12 +57,12 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
 6. **Present completion**:
    - If inputs were regenerated (step 5 triggered), show the path to the updated file.
    - Provide a concrete CLI example. If `inputs.json` contains placeholder values, suggest the safe dry-run command first:
-     > To try the updated method now, use /run or from the terminal:
+     > To try the updated method now, use /mthds-run or from the terminal:
      > ```
      > mthds run pipe <bundle-dir>/ --dry-run --mock-inputs
      > ```
      >
-     > To run with real data, use /inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
+     > To run with real data, use /mthds-inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
      > ```
      > mthds run pipe <bundle-dir>/
      > ```
