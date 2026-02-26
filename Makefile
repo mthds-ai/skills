@@ -7,7 +7,7 @@ SHARED := skills/shared
 
 # Which shared files each skill gets (error-handling + mthds-agent-guide go everywhere;
 # mthds-reference + native-content-types go everywhere except pkg)
-SKILLS_ALL  := build check edit explain fix inputs pkg run
+SKILLS_ALL  := build check edit explain fix inputs install pkg run
 SKILLS_FULL := build check edit explain fix inputs run
 
 SHARED_ALL  := error-handling.md mthds-agent-guide.md

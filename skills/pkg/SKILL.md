@@ -1,11 +1,11 @@
 ---
 name: mthds-pkg
-description: Manage MTHDS packages — initialize, add dependencies, lock, install, and update. Use when user says "init package", "add dependency", "install dependencies", "lock deps", "update packages", "set up METHODS.toml", "manage packages", "mthds init", or wants to manage MTHDS package dependencies.
+description: Manage MTHDS packages — initialize, configure exports, list, and validate. Use when user says "init package", "set up METHODS.toml", "manage packages", "mthds init", "validate package", "list package", or wants to manage MTHDS package manifests.
 ---
 
 # Manage MTHDS packages
 
-Initialize, add dependencies, lock, install, update, and validate MTHDS packages using the `mthds` CLI.
+Initialize, configure exports, list, and validate MTHDS packages using the `mthds-agent` CLI.
 
 ## Process
 
@@ -31,14 +31,27 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 Create a `METHODS.toml` manifest:
 
 ```bash
-mthds package init --directory <pkg-dir>
+mthds-agent package init --address <address> --version <version> --description <description> -C <pkg-dir>
 ```
 
-Use `--force` to overwrite an existing manifest:
+Required flags:
 
-```bash
-mthds package init --force --directory <pkg-dir>
-```
+| Flag | Purpose | Example |
+|------|---------|---------|
+| `--address` | Package address (hostname/path format) | `github.com/org/repo` |
+| `--version` | Package version (semver) | `1.0.0` |
+| `--description` | Package description | `"My method package"` |
+
+Optional flags:
+
+| Flag | Purpose | Example |
+|------|---------|---------|
+| `--authors` | Comma-separated list of authors | `"Alice, Bob"` |
+| `--license` | License identifier | `MIT` |
+| `--name` | Method name (2-25 lowercase chars) | `my-tool` |
+| `--display-name` | Human-readable display name (max 128 chars) | `"My Tool"` |
+| `--main-pipe` | Main pipe code (snake_case) | `extract_data` |
+| `--force` | Overwrite existing METHODS.toml | — |
 
 ### 2. Configure exports
 
@@ -60,105 +73,43 @@ Rules:
 - Concepts are always public and do not need to be listed in exports
 - Each `[exports.<domain>]` section requires a `pipes` key with a list of pipe code strings
 
-### 3. Add dependencies
-
-Add a dependency to the manifest:
-
-```bash
-mthds package add <address> --directory <pkg-dir>
-```
-
-Options:
-
-| Flag | Purpose | Example |
-|------|---------|---------|
-| `--alias` | Set a local alias for the dependency | `mthds package add github.com/org/repo --alias mylib --directory <pkg-dir>` |
-| `--version` | Pin a specific version | `mthds package add github.com/org/repo --version 1.2.0 --directory <pkg-dir>` |
-| `--path` | Use a local path dependency | `mthds package add ./local-pkg --path --directory <pkg-dir>` |
-
-### 4. Lock dependencies
-
-Resolve all dependencies and generate a lockfile:
-
-```bash
-mthds package lock --directory <pkg-dir>
-```
-
-### 5. Install from lockfile
-
-Install dependencies from the existing lockfile:
-
-```bash
-mthds package install --directory <pkg-dir>
-```
-
-### 6. Update dependencies
-
-Re-resolve dependencies and update the lockfile:
-
-```bash
-mthds package update --directory <pkg-dir>
-```
-
-### 7. List package manifest
+### 3. List package manifest
 
 Display the current package manifest:
 
 ```bash
-mthds package list --directory <pkg-dir>
+mthds-agent package list -C <pkg-dir>
 ```
 
-### 8. Validate package manifest
+### 4. Validate package manifest
 
 Validate the `METHODS.toml` package manifest:
 
 ```bash
-mthds package validate --directory <pkg-dir>
+mthds-agent package validate -C <pkg-dir>
 ```
 
-Options:
+> **Note**: `mthds-agent package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate pipe` (see /mthds-check skill).
 
-| Flag | Purpose | Example |
-|------|---------|---------|
-| `--all` | Validate all packages in the workspace | `mthds package validate --all --directory <pkg-dir>` |
-| `--runner` / `-r` | Specify the runner for validation | `mthds package validate --all -r pipelex --directory <pkg-dir>` |
+## The `-C` option
 
-Target a specific package:
-
-```bash
-mthds package validate <target> --directory <pkg-dir>
-```
-
-> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest. To validate `.mthds` bundle semantics, use `mthds-agent pipelex validate pipe` (see /mthds-check skill).
-
-## The `--directory` option
-
-All `mthds package` commands accept `--directory <path>` (short: `-d`) to target a package directory other than the shell's current working directory. This is essential when the agent's CWD differs from the package location.
+All `mthds-agent package` commands accept `-C <path>` (long: `--package-dir`) to target a package directory other than the shell's current working directory. This is essential when the agent's CWD differs from the package location.
 
 ```bash
 # From any directory, target a specific package
-mthds package init --directory mthds-wip/restaurant_presenter/
-mthds package validate --directory mthds-wip/restaurant_presenter/
+mthds-agent package init --address github.com/org/repo --version 1.0.0 --description "My package" -C mthds-wip/restaurant_presenter/
+mthds-agent package validate -C mthds-wip/restaurant_presenter/
 ```
 
-If `--directory` is omitted, commands default to the current working directory.
+If `-C` is omitted, commands default to the current working directory.
 
 ## Common Workflows
 
 **Starting a new package**:
-1. `mthds package init --directory <pkg-dir>` — create the manifest
+1. `mthds-agent package init --address <address> --version <version> --description <desc> -C <pkg-dir>` — create the manifest
 2. Read `.mthds` bundles in the package to extract domain codes and pipe codes
-3. Edit `METHODS.toml` to set the correct address, description, and `[exports.<domain>]` sections
-4. `mthds package validate --directory <pkg-dir>` — validate the manifest
-
-**Adding dependencies to an existing package**:
-1. `mthds package add <address> --directory <pkg-dir>` — add the dependency
-2. `mthds package lock --directory <pkg-dir>` — resolve and lock
-3. `mthds package install --directory <pkg-dir>` — install from lockfile
-
-**Updating dependencies**:
-1. `mthds package update --directory <pkg-dir>` — re-resolve and update lockfile
-2. `mthds package install --directory <pkg-dir>` — install updated deps
+3. Edit `METHODS.toml` to set the correct `[exports.<domain>]` sections
+4. `mthds-agent package validate -C <pkg-dir>` — validate the manifest
 
 ## Reference
 

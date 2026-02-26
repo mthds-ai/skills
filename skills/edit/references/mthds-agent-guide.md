@@ -187,18 +187,18 @@ Without `-L` (or directory mode for `run`), commands will load all `.mthds` file
 
 ## Package Management
 
-The `mthds` CLI includes `package` commands for managing MTHDS packages.
+The `mthds-agent package` commands manage MTHDS package manifests (`METHODS.toml`).
 
-Use these commands to initialize packages, manage dependencies, lock/install, and validate manifests.
+Use these commands to initialize packages, list manifests, and validate them.
 
-All `mthds package` commands accept `--directory <path>` (short: `-d`) to target a package directory other than CWD. This is essential when the agent's working directory differs from the package location:
+All `mthds-agent package` commands accept `-C <path>` (long: `--package-dir`) to target a package directory other than CWD. This is essential when the agent's working directory differs from the package location:
 
 ```bash
-mthds package init --directory mthds-wip/restaurant_presenter/
-mthds package validate --directory mthds-wip/restaurant_presenter/
+mthds-agent package init --address github.com/org/repo --version 1.0.0 --description "My package" -C mthds-wip/restaurant_presenter/
+mthds-agent package validate -C mthds-wip/restaurant_presenter/
 ```
 
-> **Note**: `mthds package validate` validates the `METHODS.toml` package manifest — not `.mthds` bundle semantics. For bundle validation, use `mthds-agent pipelex validate pipe`.
+> **Note**: `mthds-agent package validate` validates the `METHODS.toml` package manifest — not `.mthds` bundle semantics. For bundle validation, use `mthds-agent pipelex validate pipe`.
 
 ## Generating Visualizations
 
@@ -226,12 +226,9 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 | `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts | `mthds-agent pipelex assemble --domain my_domain ...` |
 | `mthds-agent pipelex models` | List available model presets and talent mappings | `mthds-agent pipelex models` / `mthds-agent pipelex models -t llm -b anthropic` |
 | `mthds-agent pipelex doctor` | Check config health and auto-fix | `mthds-agent pipelex doctor` |
-| `mthds package init` | Initialize METHODS.toml | `mthds package init -d <pkg-dir>` |
-| `mthds package list` | Display package manifest | `mthds package list -d <pkg-dir>` |
-| `mthds package add` | Add a dependency | `mthds package add github.com/org/repo -d <pkg-dir>` |
-| `mthds package lock` | Resolve deps and generate lockfile | `mthds package lock -d <pkg-dir>` |
-| `mthds package install` | Install from lockfile | `mthds package install -d <pkg-dir>` |
-| `mthds package update` | Re-resolve and update lockfile | `mthds package update -d <pkg-dir>` |
-| `mthds package validate` | Validate METHODS.toml package manifest | `mthds package validate --all -r pipelex -d <pkg-dir>` |
+| `mthds-agent install` | Install a method package from GitHub or local directory | `mthds-agent install org/repo --agent claude-code --location local` |
+| `mthds-agent package init` | Initialize METHODS.toml | `mthds-agent package init --address github.com/org/repo --version 1.0.0 --description "desc" -C <pkg-dir>` |
+| `mthds-agent package list` | Display package manifest | `mthds-agent package list -C <pkg-dir>` |
+| `mthds-agent package validate` | Validate METHODS.toml package manifest | `mthds-agent package validate -C <pkg-dir>` |
 
 > **Note**: All commands accept the `--log-level` global option before the subcommand (see [Global Options](#global-options)).
