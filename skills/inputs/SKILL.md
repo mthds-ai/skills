@@ -118,7 +118,7 @@ mthds-agent pipelex inputs pipe <bundle.mthds> -L <bundle-dir>/ [--pipe specific
 }
 ```
 
-For error handling, see [Error Handling Reference](references/error-handling.md).
+For error handling, see [Error Handling Reference](../shared/error-handling.md).
 
 ### Step 3: Choose Input Strategy
 
@@ -357,7 +357,7 @@ mthds-agent pipelex run pipe pipelex/builder/synthetic_inputs/synthesize_image.m
 
 **Output**: The pipeline saves the generated image to `<output_dir>/inputs/` and returns the file path.
 
-For image synthesis error handling, see [Error Handling Reference](references/error-handling.md).
+For image synthesis error handling, see [Error Handling Reference](../shared/error-handling.md).
 
 ---
 
@@ -686,7 +686,7 @@ User says: "Use the photos in `./product-photos/`"
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read for concept definitions and syntax
-- [Native Content Types](references/native-content-types.md) — read for the full attribute reference of each native content type when assembling input JSON
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read for concept definitions and syntax
+- [Native Content Types](../shared/native-content-types.md) — read for the full attribute reference of each native content type when assembling input JSON

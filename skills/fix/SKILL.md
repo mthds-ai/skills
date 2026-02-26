@@ -37,7 +37,7 @@ mthds-agent pipelex validate pipe <file>.mthds -L <bundle-directory>/
 Parse the JSON output:
 - If `success: true` — nothing to fix, report clean status
 - If `error_type: "ValidateBundleError"` — iterate through `validation_errors` array and fix each (Step 2)
-- If model/config error — see [Error Handling Reference](references/error-handling.md#model--config-errors) (cannot be fixed by editing the .mthds file)
+- If model/config error — see [Error Handling Reference](../shared/error-handling.md#model--config-errors) (cannot be fixed by editing the .mthds file)
 
 ### Step 2: Fix .mthds Validation Errors
 
@@ -57,7 +57,7 @@ Use the `error_type` field from each validation error to determine the fix:
 | `unknown_concept` | Add the concept definition to the bundle, or fix the typo |
 | `batch_item_name_collision` | Rename `input_item_name` (or `batch_as`) to a distinct singular form of the list name. Also update the branch pipe's `inputs` to use the new item name. |
 
-For error type descriptions, see [Error Handling — Validation Error Types](references/error-handling.md#validation-error-types).
+For error type descriptions, see [Error Handling — Validation Error Types](../shared/error-handling.md#validation-error-types).
 
 ### Step 3: Fix TOML Formatting Issues
 
@@ -121,7 +121,7 @@ mthds-agent --log-level debug pipelex validate pipe <file>.mthds -L <bundle-dire
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
-- [Native Content Types](references/native-content-types.md) — read when fixing type mismatches involving native concepts, to verify available attributes
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
+- [Native Content Types](../shared/native-content-types.md) — read when fixing type mismatches involving native concepts, to verify available attributes

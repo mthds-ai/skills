@@ -35,9 +35,9 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 3. **Parse the JSON output**:
    - If `success: true` — all pipes validated, report clean status
-   - If error — see [Error Handling Reference](references/error-handling.md) for error types and recovery
+   - If error — see [Error Handling Reference](../shared/error-handling.md) for error types and recovery
 
-4. **Cross-domain validation** — when the bundle references pipes from other domains, use `--library-dir` (see [Error Handling — Cross-Domain](references/error-handling.md#cross-domain-validation))
+4. **Cross-domain validation** — when the bundle references pipes from other domains, use `--library-dir` (see [Error Handling — Cross-Domain](../shared/error-handling.md#cross-domain-validation))
 
 5. **Analyze for additional issues** (manual review beyond CLI validation):
    - Unused concepts (defined but never referenced)
@@ -66,7 +66,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read when reviewing .mthds TOML syntax
-- [Native Content Types](references/native-content-types.md) — read when checking `$var.field` references in prompts to verify the attribute exists on the content type
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read when reviewing .mthds TOML syntax
+- [Native Content Types](../shared/native-content-types.md) — read when checking `$var.field` references in prompts to verify the attribute exists on the content type

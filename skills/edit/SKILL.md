@@ -92,7 +92,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    ```bash
    mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
    ```
-   If errors, see [Error Handling Reference](references/error-handling.md) for recovery strategies by error domain. Use /mthds-fix skill for automatic error resolution.
+   If errors, see [Error Handling Reference](../shared/error-handling.md) for recovery strategies by error domain. Use /mthds-fix skill for automatic error resolution.
 
 5. **Regenerate inputs if needed**:
    - If inputs changed, run `mthds-agent pipelex inputs pipe <file>.mthds -L <bundle-dir>/`
@@ -121,8 +121,8 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
-- [Native Content Types](references/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
+- [Native Content Types](../shared/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
 - [Talents & Presets](references/talents-and-presets.md) — read when setting or changing the `model` field in a pipe, to find the correct preset name

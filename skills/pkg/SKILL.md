@@ -113,5 +113,5 @@ If `-C` is omitted, commands default to the current working directory.
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details

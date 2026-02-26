@@ -89,7 +89,7 @@ This produces an interactive HTML visualization (`live_run.html`) next to the bu
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read for concept definitions and syntax
-- [Native Content Types](references/native-content-types.md) — read when explaining what data flows through pipes (e.g., what attributes Page or Image content carries)
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read for concept definitions and syntax
+- [Native Content Types](../shared/native-content-types.md) — read when explaining what data flows through pipes (e.g., what attributes Page or Image content carries)

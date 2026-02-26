@@ -118,9 +118,9 @@ Common errors:
 | `Method "X" not found` | `--method` filter doesn't match any method in the package | Check available method names in the package |
 | `Failed to install pipelex runtime` | Runtime install failed (network, permissions) | Retry, or use `--no-runner` to skip runtime install |
 
-For all error types and recovery strategies, see [Error Handling Reference](references/error-handling.md).
+For all error types and recovery strategies, see [Error Handling Reference](../shared/error-handling.md).
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details

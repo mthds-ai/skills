@@ -158,11 +158,11 @@ For each concept, draft:
 - **Description**: What it represents
 - **Type**: Either `refines: NativeConcept` OR `structure: {...}`
 
-**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](references/mthds-reference.md#native-concepts)
+**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](../shared/mthds-reference.md#native-concepts)
 
 > **Note**: `Document` is the native concept for any document (PDF, Word, etc.). `Image` is for any image format (JPEG, PNG, etc.). File formats like "PDF" or "JPEG" are not concepts.
 
-Each native concept has accessible attributes (e.g., `Image` has `url`, `public_url`, `filename`, `caption`...; `Document` has `url`, `public_url`, `filename`...; `Page` has `text_and_images` and `page_view`). See [Native Content Types](references/native-content-types.md) for the full attribute reference — essential for `$var.field` prompts and `construct` blocks.
+Each native concept has accessible attributes (e.g., `Image` has `url`, `public_url`, `filename`, `caption`...; `Document` has `url`, `public_url`, `filename`...; `Page` has `text_and_images` and `page_view`). See [Native Content Types](../shared/native-content-types.md) for the full attribute reference — essential for `$var.field` prompts and `construct` blocks.
 
 **Concept naming rules**:
 - No adjectives: `Article` not `LongArticle`
@@ -370,9 +370,9 @@ After the command succeeds:
 
 ## Reference
 
-- [Error Handling](references/error-handling.md) — read when CLI returns an error to determine recovery
-- [MTHDS Agent Guide](references/mthds-agent-guide.md) — read for CLI command syntax or output format details
-- [MTHDS Language Reference](references/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
-- [Native Content Types](references/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
+- [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
+- [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
+- [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
+- [Native Content Types](../shared/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
 - [Manual Build Phases](references/manual-build-phases.md) — read for detailed ASCII diagrams and CLI examples per phase
 - [Talents and Presets](references/talents-and-presets.md) — read when selecting model talents for pipe structuring
