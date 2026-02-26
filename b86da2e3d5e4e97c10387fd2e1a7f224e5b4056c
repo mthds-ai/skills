@@ -1,0 +1,23 @@
+CLAUDE.md
+  c4dada1d1c3f17dc 1-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "b86da2e3d5e4e97c10387fd2e1a7f224e5b4056c",
+  "prompts": {
+    "c4dada1d1c3f17dc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1b38f019-67bf-4b2c-bcaf-098c922ee04b",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 75,
+      "overriden_lines": 0
+    }
+  }
+}
