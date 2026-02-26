@@ -1,0 +1,39 @@
+skills/explain/SKILL.md
+  3fead5842f4e1e2c 2,68
+skills/shared/mthds-agent-guide.md
+  3fead5842f4e1e2c 30,46
+skills/edit/SKILL.md
+  3fead5842f4e1e2c 2,51,60,65
+skills/fix/SKILL.md
+  3fead5842f4e1e2c 2-3
+skills/build/SKILL.md
+  3fead5842f4e1e2c 2,61-62,294,300
+skills/run/SKILL.md
+  3fead5842f4e1e2c 2,29,31,35,61,90
+skills/check/SKILL.md
+  3fead5842f4e1e2c 2
+skills/inputs/SKILL.md
+  3fead5842f4e1e2c 2,23,99
+skills/pkg/SKILL.md
+  3fead5842f4e1e2c 2,117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "f8665ea374e493629661a096b21cb55a13d124b4",
+  "prompts": {
+    "3fead5842f4e1e2c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2dc85d21-d0fc-43e9-a9ee-e027cb6dcabe",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 28,
+      "total_deletions": 28,
+      "accepted_lines": 27,
+      "overriden_lines": 0
+    }
+  }
+}
