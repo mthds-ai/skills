@@ -22,6 +22,7 @@
         "./skills/fix",
         "./skills/run",
         "./skills/inputs",
+        "./skills/install",
         "./skills/pkg"
       ]
     }
