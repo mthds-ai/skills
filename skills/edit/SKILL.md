@@ -59,12 +59,12 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
    - Provide a concrete CLI example. If `inputs.json` contains placeholder values, suggest the safe dry-run command first:
      > To try the updated method now, use /run or from the terminal:
      > ```
-     > mthds run <bundle-dir>/ --dry-run --mock-inputs
+     > mthds run pipe <bundle-dir>/ --dry-run --mock-inputs
      > ```
      >
      > To run with real data, use /inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
      > ```
-     > mthds run <bundle-dir>/
+     > mthds run pipe <bundle-dir>/
      > ```
 
 ## Common Edit Operations

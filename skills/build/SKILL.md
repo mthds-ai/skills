@@ -293,13 +293,13 @@ After the command succeeds:
 2. **Next steps — try it now**: If the method requires inputs, the saved `inputs.json` still contains placeholder values, so suggest a dry run first:
    > To try this method right now, use /run or from the terminal:
    > ```
-   > mthds run <output_dir>/ --dry-run --mock-inputs
+   > mthds run pipe <output_dir>/ --dry-run --mock-inputs
    > ```
 
 3. **Next steps — run with real data**: Explain how to prepare real inputs, then run for real:
    > To run with real data, use /inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
    > ```
-   > mthds run <output_dir>/
+   > mthds run pipe <output_dir>/
    > ```
 
    Replace `<output_dir>` with the actual output directory path used throughout the build.
