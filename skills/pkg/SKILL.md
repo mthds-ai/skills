@@ -9,7 +9,22 @@ Initialize, add dependencies, lock, install, update, and validate MTHDS packages
 
 ## Process
 
-**Prerequisite**: See [CLI Prerequisites](../shared/prerequisites.md)
+### Step 0 — CLI Check (mandatory, do this FIRST)
+
+Run `mthds-agent --version`.
+
+- **If it succeeds**: proceed to the next step.
+- **If it fails or the command is not found**: STOP. Do not proceed with this skill. Tell the user:
+
+> The `mthds-agent` CLI is required but not installed. Install it with:
+>
+> ```
+> npm install -g mthds
+> ```
+>
+> Then re-run this skill.
+
+Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 
 ### 1. Initialize a package
 
@@ -147,6 +162,6 @@ If `--directory` is omitted, commands default to the current working directory.
 
 ## Reference
 
-- [CLI Prerequisites](../shared/prerequisites.md) — read at skill start to check CLI availability
+- [CLI Prerequisites](../shared/prerequisites.md) — supplementary reference (CLI check is inlined above in Step 0)
 - [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
 - [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details

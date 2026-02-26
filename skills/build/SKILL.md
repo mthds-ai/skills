@@ -28,6 +28,25 @@ See [Mode Selection](../shared/mode-selection.md) for general mode behavior.
 
 ---
 
+## Step 0 — CLI Check (mandatory, do this FIRST)
+
+Run `mthds-agent --version`.
+
+- **If it succeeds**: proceed to the next step.
+- **If it fails or the command is not found**: STOP. Do not proceed with this skill. Tell the user:
+
+> The `mthds-agent` CLI is required but not installed. Install it with:
+>
+> ```
+> npm install -g mthds
+> ```
+>
+> Then re-run this skill.
+
+Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
+
+---
+
 ## Existing Method Detection
 
 **Goal**: Before starting a new build, check whether the project already contains methods that overlap with the user's request.
@@ -60,12 +79,6 @@ For the general case, scan `mthds-wip/` and any other directories containing `.m
 - **Start fresh**: Proceed with the build as normal (automatic or interactive path below).
 - **Use the existing method**: End the build. Remind the user they can run it with `/mthds-run` and point them to its `inputs.json` if available.
 - **Build upon it**: Switch to the /mthds-edit skill, framing the task as an extension — ask the user what additional processing they want to add (e.g., a preprocessing step before the main pipe, a postprocessing step after, or additional parallel branches). Pass the existing `.mthds` file path to the edit workflow.
-
----
-
-## Prerequisites
-
-See [CLI Prerequisites](../shared/prerequisites.md)
 
 ---
 
@@ -328,7 +341,7 @@ After the command succeeds:
 
 ## Reference
 
-- [CLI Prerequisites](../shared/prerequisites.md) — read at skill start to check CLI availability
+- [CLI Prerequisites](../shared/prerequisites.md) — supplementary reference (CLI check is inlined above in Step 0)
 - [Error Handling](../shared/error-handling.md) — read when CLI returns an error to determine recovery
 - [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
 - [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
