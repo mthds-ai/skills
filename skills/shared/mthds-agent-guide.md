@@ -2,6 +2,10 @@
 
 Strategy and reference for agents working with MTHDS methods programmatically.
 
+## Minimum CLI Version
+
+All skills in this plugin require `mthds-agent >= 0.0.12`. The Step 0 CLI Check in each skill enforces this — parse the output of `mthds-agent --version` and block execution if the version is below `0.0.12`.
+
 ## Agent CLI
 
 Agents must use `mthds-agent` exclusively. It outputs structured JSON (stdout=success, stderr=error with exit code 1).

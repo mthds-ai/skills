@@ -10,7 +10,7 @@ help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  %-14s %s\n", $$1, $$2}'
 
-check: ## Verify shared refs use ../shared/ paths and all shared files exist
+check: ## Verify shared refs, shared files, and version consistency
 	@echo "Checking for stale references/ paths to shared files..."
 	@if grep -rn 'references/\(error-handling\|mthds-agent-guide\|mthds-reference\|native-content-types\)' skills/*/SKILL.md 2>/dev/null; then \
 		echo "FAIL: Found stale references/ paths to shared files (see above). Should use ../shared/ instead."; \
@@ -30,4 +30,23 @@ check: ## Verify shared refs use ../shared/ paths and all shared files exist
 		exit 1; \
 	fi
 	@echo "  All shared files present."
+	@echo "Checking min_mthds_version consistency..."
+	@canonical=$$(grep -oE 'mthds-agent >= [0-9]+\.[0-9]+\.[0-9]+' $(SHARED)/mthds-agent-guide.md | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') || \
+		{ echo "FAIL: Cannot extract canonical version from $(SHARED)/mthds-agent-guide.md"; exit 1; }; \
+	fail=0; \
+	for skill in skills/*/SKILL.md; do \
+		ver=$$(sed -n '/^---$$/,/^---$$/{ s/^min_mthds_version: *//p; }' "$$skill"); \
+		if [ -z "$$ver" ]; then \
+			echo "  MISSING: $$skill has no min_mthds_version in front matter"; \
+			fail=1; \
+		elif [ "$$ver" != "$$canonical" ]; then \
+			echo "  MISMATCH: $$skill has $$ver, expected $$canonical"; \
+			fail=1; \
+		fi; \
+	done; \
+	if [ $$fail -eq 1 ]; then \
+		echo "FAIL: Version inconsistency detected (canonical: $$canonical from $(SHARED)/mthds-agent-guide.md)"; \
+		exit 1; \
+	fi
+	@echo "  All versions consistent."
 	@echo "All checks passed."
