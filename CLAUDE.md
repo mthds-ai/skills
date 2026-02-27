@@ -11,17 +11,17 @@ skills/
 │   ├── hooks.json                    # PostToolUse hook config (fires on Write|Edit)
 │   └── validate-mthds.sh            # Lint → format → validate .mthds files via mthds-agent
 ├── skills/
-│   ├── build/                        # /build — create new .mthds bundles from scratch
+│   ├── mthds-build/                  # /build — create new .mthds bundles from scratch
 │   │   └── references/              # Skill-specific refs (manual-build-phases, talents-and-presets)
-│   ├── check/                        # /check — validate bundles (read-only)
-│   ├── edit/                         # /edit — modify existing bundles
+│   ├── mthds-check/                  # /check — validate bundles (read-only)
+│   ├── mthds-edit/                   # /edit — modify existing bundles
 │   │   └── references/              # Skill-specific refs (talents-and-presets)
-│   ├── explain/                      # /explain — document and explain workflows
-│   ├── fix/                          # /fix — auto-fix validation errors
-│   ├── inputs/                       # /inputs — prepare inputs (templates, synthetic data)
-│   ├── install/                      # /install — install method packages
-│   ├── pkg/                          # /pkg — MTHDS package management (init, deps, lock)
-│   ├── run/                          # /run — execute methods and interpret output
+│   ├── mthds-explain/                # /explain — document and explain workflows
+│   ├── mthds-fix/                    # /fix — auto-fix validation errors
+│   ├── mthds-inputs/                 # /inputs — prepare inputs (templates, synthetic data)
+│   ├── mthds-install/                # /install — install method packages
+│   ├── mthds-pkg/                    # /pkg — MTHDS package management (init, deps, lock)
+│   ├── mthds-run/                    # /run — execute methods and interpret output
 │   └── shared/                       # Shared reference docs (linked via ../shared/ from SKILL.md)
 │       ├── error-handling.md
 │       ├── mthds-agent-guide.md

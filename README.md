@@ -37,15 +37,15 @@ If not installed, install the `mthds` npm package: `npm install -g mthds`. For d
 
 ```
 skills/
-├── build/              # Build skill + reference docs
+├── mthds-build/        # Build skill + reference docs
 │   └── references/     # Manual build phases, talent/preset mappings
-├── check/              # Validate workflows
-├── edit/               # Edit workflows
-├── explain/            # Explain workflows
-├── fix/                # Fix validation errors
-├── run/                # Run pipelines
-├── inputs/             # Prepare inputs (template, synthetic, user data)
-├── pkg/                # Package management
+├── mthds-check/        # Validate workflows
+├── mthds-edit/         # Edit workflows
+├── mthds-explain/      # Explain workflows
+├── mthds-fix/          # Fix validation errors
+├── mthds-run/          # Run pipelines
+├── mthds-inputs/       # Prepare inputs (template, synthetic, user data)
+├── mthds-pkg/          # Package management
 └── shared/             # Shared references across all skills
     ├── prerequisites.md
     ├── error-handling.md
