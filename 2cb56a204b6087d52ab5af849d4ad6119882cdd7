@@ -1,0 +1,78 @@
+skills/inputs/SKILL.md
+  0b3edfe889827745 3,65,77,79,87
+  b2a1e08e53a840bb 2
+skills/explain/SKILL.md
+  b2a1e08e53a840bb 2
+  0b3edfe889827745 3,15,27,29,37
+skills/fix/SKILL.md
+  0b3edfe889827745 3,15,27,29,37
+  b2a1e08e53a840bb 2
+skills/run/SKILL.md
+  0b3edfe889827745 3,15,27,29,37
+  b2a1e08e53a840bb 2
+skills/shared/mthds-agent-guide.md
+  27c0bbce419efda2 27-36
+skills/check/SKILL.md
+  b2a1e08e53a840bb 2
+  0b3edfe889827745 3,15,27,29,37
+skills/build/SKILL.md
+  b2a1e08e53a840bb 2
+  0b3edfe889827745 3,63,75,77,85
+skills/install/SKILL.md
+  b2a1e08e53a840bb 2
+  0b3edfe889827745 3,15,27,29,37
+skills/shared/error-handling.md
+  27c0bbce419efda2 131
+skills/edit/SKILL.md
+  b2a1e08e53a840bb 2
+  0b3edfe889827745 3,59,71,73,81
+skills/pkg/SKILL.md
+  0b3edfe889827745 3,15,27,29,37
+  b2a1e08e53a840bb 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "2cb56a204b6087d52ab5af849d4ad6119882cdd7",
+  "prompts": {
+    "0b3edfe889827745": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "367b7d6d-f12e-4b52-8a1d-50be40d0ea80",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 45,
+      "total_deletions": 45,
+      "accepted_lines": 45,
+      "overriden_lines": 0
+    },
+    "27c0bbce419efda2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "14e34980-50a9-46c4-a42c-be2a930ac8ab",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 11,
+      "total_deletions": 0,
+      "accepted_lines": 11,
+      "overriden_lines": 0
+    },
+    "b2a1e08e53a840bb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "13a2b25e-caf3-4599-894a-873feecca113",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 9,
+      "accepted_lines": 9,
+      "overriden_lines": 0
+    }
+  }
+}
