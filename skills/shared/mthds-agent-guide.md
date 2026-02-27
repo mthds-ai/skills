@@ -1,17 +1,53 @@
 # MTHDS Agent Guide
 
-All skills in this plugin require `mthds-agent >= 0.0.12`. The Step 0 CLI Check in each skill enforces this — parse the output of `mthds-agent --version` and block execution if the version is below `0.0.12`.
+All skills in this plugin require `mthds-agent >= 0.0.13`. The Step 0 CLI Check in each skill enforces this — parse the output of `mthds-agent --version` and block execution if the version is below `0.0.13`.
 
-## Prerequisites
+## IMPORTANT PREREQUISITES
 
-Before working, always check if the cli is installed and working:
+Before working, or if there is any doubt about the CLI, check the following in order:
+
+### 1. Check if `mthds` is installed
 
 ```bash
 mthds --version
 ```
 
-If it fails, ASK the user if he wants to install it. If he says YES, run `npm install -g mthds`.
-Then ask him a 2nd question: To RUN methods, he needs to install a runtime. The only runtime for now is `pipelex`. Ask him if he wants to install it. If he says YES, run `mthds-agent pipelex init -g <options-json>`. and run the `mthds-agent pipelex init --help` command to understand how to create the options-JSON.
+If it fails, ASK the user if they want to install it. If YES, run `npm install -g mthds`.
+
+### 2. Check if the `pipelex` runtime is installed
+
+To RUN methods, the user needs the `pipelex` runtime. ASK the user if they want to install it. If YES:
+
+```bash
+mthds-agent runner setup pipelex
+```
+
+This installs the pipelex binary. It does NOT configure anything.
+
+### 3. Initialize pipelex configuration
+
+After pipelex is installed, it needs to be configured. **You MUST ask the user ALL of the following questions BEFORE running any init command. Do NOT run the CLI until you have all answers.**
+
+**Question 1 — Backends:** Ask the user which AI backends they want to enable. Examples: `openai`, `anthropic`, `pipelex_gateway`. Run `mthds-agent pipelex init --help` to discover all available options.
+
+**Question 2 — Gateway terms (only if `pipelex_gateway` was chosen):** Ask the user: "Do you accept the Pipelex Gateway Terms of Service and Privacy Policy? See: https://www.pipelex.com/privacy-policy". Only set `"accept_gateway_terms": true` if the user explicitly says yes. If they decline, remove `pipelex_gateway` from the backends list.
+
+**Question 3 — Telemetry:** Ask the user: "Do you want anonymous telemetry enabled?" Options: `"off"` (no telemetry) or `"anonymous"` (anonymous usage data).
+
+**Only after collecting all answers**, build the JSON config and run:
+
+```bash
+# Example without pipelex_gateway:
+mthds-agent pipelex init -g --config '{"backends": ["openai"], "telemetry_mode": "off"}'
+
+# Example with pipelex_gateway (user accepted terms):
+mthds-agent pipelex init -g --config '{"backends": ["pipelex_gateway", "openai"], "accept_gateway_terms": true, "telemetry_mode": "anonymous"}'
+```
+
+- `-g` targets the global `~/.pipelex/` directory. Without it, targets project-level `.pipelex/` (requires a project root).
+- Config JSON schema: `{"backends": list[str], "primary_backend": str, "accept_gateway_terms": bool, "telemetry_mode": str}`. All fields optional.
+- When `pipelex_gateway` is in backends, `accept_gateway_terms` must be set.
+- When 2+ backends are selected without `pipelex_gateway`, `primary_backend` is required.
 
 FROM NOW ON, ASSUME THE CLI IS INSTALLED AND WORKING, and ONLY USE `mthds-agent` commands.
 
@@ -231,6 +267,9 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 
 | Command | Purpose | Example |
 |---------|---------|---------|
+| `mthds-agent runner setup pipelex` | Install the pipelex runtime (does not configure) | `mthds-agent runner setup pipelex` |
+| `mthds-agent runner setup api` | Set up the API runner credentials | `mthds-agent runner setup api --api-key sk-...` |
+| `mthds-agent pipelex init` | Initialize pipelex configuration (non-interactive) | `mthds-agent pipelex init -g --config '{"backends": ["openai"]}'` |
 | `mthds-agent pipelex run pipe` | Execute a pipeline (compact output by default; use `--with-memory` for full envelope) | `mthds-agent pipelex run pipe <bundle-dir>/` |
 | `mthds-agent pipelex validate pipe` | Validate a bundle or pipe | `mthds-agent pipelex validate pipe bundle.mthds` |
 | `mthds-agent pipelex inputs pipe` | Generate example input JSON | `mthds-agent pipelex inputs pipe bundle.mthds` |
