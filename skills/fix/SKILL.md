@@ -1,5 +1,5 @@
 ---
-name: mthds-fix
+name: fix
 min_mthds_version: 0.0.12
 description: Fix issues in MTHDS bundles. Use when user says "fix this workflow", "fix this method", "repair validation errors", "the pipeline is broken", "fix the .mthds file", after /mthds-check found issues, or when validation reports errors. Automatically applies fixes and re-validates in a loop.
 ---
