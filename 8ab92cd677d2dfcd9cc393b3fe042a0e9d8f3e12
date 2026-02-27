@@ -1,0 +1,65 @@
+skills/pkg/SKILL.md
+  25d6466d3ab8bf7c 3,15
+  bf4b4a18d8c8b7ad 27-37
+Makefile
+  25d6466d3ab8bf7c 13,33-51
+skills/shared/mthds-agent-guide.md
+  bf4b4a18d8c8b7ad 5-8
+skills/run/SKILL.md
+  25d6466d3ab8bf7c 3,15
+  bf4b4a18d8c8b7ad 27-37
+skills/explain/SKILL.md
+  25d6466d3ab8bf7c 3,15
+  bf4b4a18d8c8b7ad 27-37
+skills/edit/SKILL.md
+  bf4b4a18d8c8b7ad 71-81
+  25d6466d3ab8bf7c 3,59
+skills/fix/SKILL.md
+  bf4b4a18d8c8b7ad 27-37
+  25d6466d3ab8bf7c 3,15
+skills/inputs/SKILL.md
+  25d6466d3ab8bf7c 3,65
+  bf4b4a18d8c8b7ad 77-87
+skills/check/SKILL.md
+  bf4b4a18d8c8b7ad 27-37
+  25d6466d3ab8bf7c 3,15
+skills/build/SKILL.md
+  25d6466d3ab8bf7c 3,63
+  bf4b4a18d8c8b7ad 75-85
+skills/install/SKILL.md
+  bf4b4a18d8c8b7ad 27-37
+  25d6466d3ab8bf7c 3,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "8ab92cd677d2dfcd9cc393b3fe042a0e9d8f3e12",
+  "prompts": {
+    "25d6466d3ab8bf7c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fbddef86-ecd5-445b-ac42-50e8125c9578",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 61,
+      "total_deletions": 32,
+      "accepted_lines": 38,
+      "overriden_lines": 0
+    },
+    "bf4b4a18d8c8b7ad": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "de9e34b6-566a-460e-97ad-9035d3f5679a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 130,
+      "total_deletions": 27,
+      "accepted_lines": 112,
+      "overriden_lines": 0
+    }
+  }
+}
