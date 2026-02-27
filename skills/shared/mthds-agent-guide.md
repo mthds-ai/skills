@@ -1,10 +1,19 @@
 # MTHDS Agent Guide
 
-Strategy and reference for agents working with MTHDS methods programmatically.
-
-## Minimum CLI Version
-
 All skills in this plugin require `mthds-agent >= 0.0.12`. The Step 0 CLI Check in each skill enforces this — parse the output of `mthds-agent --version` and block execution if the version is below `0.0.12`.
+
+## Prerequisites
+
+Before working, always check if the cli is installed and working:
+
+```bash
+mthds --version
+```
+
+If it fails, ASK the user if he wants to install it. If he says YES, run `npm install -g mthds`.
+Then ask him a 2nd question: To RUN methods, he needs to install a runtime. The only runtime for now is `pipelex`. Ask him if he wants to install it. If he says YES, run `mthds-agent pipelex init -g <options-json>`. and run the `mthds-agent pipelex init --help` command to understand how to create the options-JSON.
+
+FROM NOW ON, ASSUME THE CLI IS INSTALLED AND WORKING, and ONLY USE `mthds-agent` commands.
 
 ## Agent CLI
 
