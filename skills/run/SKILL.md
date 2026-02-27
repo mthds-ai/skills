@@ -1,6 +1,6 @@
 ---
-name: run
-min_mthds_version: 0.0.12
+name: mthds-run
+min_mthds_version: 0.0.13
 description: Run MTHDS methods and interpret results. Use when user says "run this pipeline", "execute the workflow", "execute the method", "test this .mthds file", "try it out", "see the output", "dry run", or wants to execute any MTHDS method bundle and see its output.
 ---
 
@@ -12,7 +12,7 @@ Execute MTHDS method bundles and interpret their JSON output.
 
 ### Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.0.12** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.0.13** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -24,9 +24,9 @@ Run `mthds-agent --version`. The minimum required version is **0.0.12** (declare
 >
 > Then re-run this skill.
 
-- **If the version is below 0.0.12**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.0.13**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.0.12 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.0.13 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -34,7 +34,7 @@ Run `mthds-agent --version`. The minimum required version is **0.0.12** (declare
 >
 > Then re-run this skill.
 
-- **If the version is 0.0.12 or higher**: proceed to the next step.
+- **If the version is 0.0.13 or higher**: proceed to the next step.
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 

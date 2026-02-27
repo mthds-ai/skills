@@ -24,6 +24,16 @@ mthds-agent runner setup pipelex
 
 This installs the pipelex binary. It does NOT configure anything.
 
+If this fails (e.g., in sandboxed environments where the install script is blocked), install via pip instead:
+
+```bash
+pip install pipelex
+```
+
+Ensure the install directory is on PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`).
+
+> **Note**: In Claude Cowork sandbox environments, `pip` is available out of the box — use `pip install pipelex` directly instead of trying the runner setup first.
+
 ### 3. Initialize pipelex configuration
 
 After pipelex is installed, it needs to be configured. **You MUST ask the user ALL of the following questions BEFORE running any init command. Do NOT run the CLI until you have all answers.**

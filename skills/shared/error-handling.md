@@ -128,6 +128,7 @@ Example output:
 | `FileNotFoundError` | Bundle file or input file not found | Check file paths are correct |
 | `JSONDecodeError` | Invalid JSON in inputs | Fix JSON syntax |
 | `ArgumentError` | Invalid CLI flag combination | Check command flags (e.g., `--mock-inputs` requires `--dry-run`) |
+| `BinaryNotFoundError` | A required binary (e.g., `pipelex-agent`) is not on PATH | Run `mthds-agent runner setup pipelex`. If that fails, try `pip install pipelex`. Ensure the install directory is on PATH. |
 
 ## Cross-Domain Validation & Library Isolation
 
