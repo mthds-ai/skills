@@ -1,0 +1,54 @@
+.claude-plugin/plugin.json
+  910617e933a27391 1-11
+skills/check/SKILL.md
+  83e77d4bf1246474 2
+skills/explain/SKILL.md
+  83e77d4bf1246474 2
+skills/run/SKILL.md
+  83e77d4bf1246474 2
+skills/inputs/SKILL.md
+  83e77d4bf1246474 2
+skills/build/SKILL.md
+  83e77d4bf1246474 2
+skills/pkg/SKILL.md
+  83e77d4bf1246474 2
+skills/install/SKILL.md
+  83e77d4bf1246474 2
+skills/edit/SKILL.md
+  83e77d4bf1246474 2
+skills/fix/SKILL.md
+  83e77d4bf1246474 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.5",
+  "base_commit_sha": "1504fca55d4bde797088d0df210194cb899aaf57",
+  "prompts": {
+    "83e77d4bf1246474": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7427d331-072f-4791-bb5c-2366c5dcf34c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 9,
+      "accepted_lines": 9,
+      "overriden_lines": 0
+    },
+    "910617e933a27391": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4abaf1b-10ef-4de3-a5fe-dc4ecf52dc1b",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 11,
+      "total_deletions": 0,
+      "accepted_lines": 11,
+      "overriden_lines": 0
+    }
+  }
+}
