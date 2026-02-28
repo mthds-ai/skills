@@ -215,7 +215,7 @@ server.tool(
 
 server.tool(
   "connect_pipelex",
-  "Connect to Pipelex. Returns a login URL the user must click in their browser. After login, the API key is saved locally. Call check_pipelex_auth afterwards to verify.",
+  "Connect to Pipelex. IMPORTANT: This tool returns a login URL that you MUST display as a clickable markdown link to the user. After they log in, call check_pipelex_auth to verify.",
   { provider: z.enum(["google", "github"]).default("google").describe("OAuth provider") },
   async ({ provider }) => {
     if (readApiKey()) {
