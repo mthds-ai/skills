@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "pipelex": {
+      "command": "sh",
+      "args": ["-c", "cd \"${CLAUDE_PLUGIN_ROOT}/mcp\" && npm install --silent 2>/dev/null && node server.mjs"],
+      "env": {
+        "PIPELEX_API_URL": "https://app-staging.pipelex.com"
+      }
+    }
+  }
+}

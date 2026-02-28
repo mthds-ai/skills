@@ -1,0 +1,10 @@
+{
+  "name": "pipelex-mcp",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "server.mjs",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1"
+  }
+}
