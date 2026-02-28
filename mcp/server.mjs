@@ -64,10 +64,12 @@ function writeApiKey(key) {
 
 function openBrowser(url) {
   const cmd =
-    process.platform === "darwin" ? "open" :
+    process.platform === "darwin" ? "/usr/bin/open" :
     process.platform === "win32" ? "start" :
     "xdg-open";
-  exec(`${cmd} "${url}"`);
+  exec(`${cmd} "${url}"`, (err) => {
+    if (err) console.error("Failed to open browser:", err.message);
+  });
 }
 
 // ---------------------------------------------------------------------------
