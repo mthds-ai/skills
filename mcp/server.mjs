@@ -157,15 +157,36 @@ function startAuthFlow(provider) {
       const port = server.address().port;
       const callback = `http://localhost:${port}/callback`;
       const authUrl = `${PIPELEX_API_URL}/auth/${provider}?cli_redirect=${encodeURIComponent(callback)}`;
-      openBrowser(authUrl);
+
+      // Try to open browser, but also return the URL in case exec is blocked (e.g. Electron sandbox)
+      exec(`/usr/bin/open "${authUrl}"`, () => {});
+
+      // Resolve immediately with the URL so the LLM can present it as a clickable link
+      resolve({ status: "waiting", authUrl });
 
       setTimeout(() => {
         if (!done) {
           cleanup();
-          resolve({ status: "not_connected", error: "timeout" });
         }
       }, AUTH_TIMEOUT_MS);
     });
+  });
+}
+
+// Wait for the callback server to receive the key (called after startAuthFlow)
+function waitForCallback(timeout = AUTH_TIMEOUT_MS) {
+  return new Promise((resolve) => {
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const key = readApiKey();
+      if (key) {
+        clearInterval(interval);
+        resolve({ status: "connected" });
+      } else if (Date.now() - start > timeout) {
+        clearInterval(interval);
+        resolve({ status: "not_connected", error: "timeout" });
+      }
+    }, 1000);
   });
 }
 
@@ -194,7 +215,7 @@ server.tool(
 
 server.tool(
   "connect_pipelex",
-  "Connect to Pipelex by opening a browser login page. The API key is saved locally and never passes through this conversation.",
+  "Connect to Pipelex. Returns a login URL the user must click in their browser. After login, the API key is saved locally. Call check_pipelex_auth afterwards to verify.",
   { provider: z.enum(["google", "github"]).default("google").describe("OAuth provider") },
   async ({ provider }) => {
     if (readApiKey()) {
@@ -203,16 +224,16 @@ server.tool(
 
     const result = await startAuthFlow(provider);
 
-    if (result.status === "connected") {
-      return { content: [{ type: "text", text: "Successfully connected to Pipelex! API key saved to ~/.pipelex/.env." }] };
+    if (result.authUrl) {
+      return {
+        content: [{
+          type: "text",
+          text: `Please click this link to connect to Pipelex:\n\n${result.authUrl}\n\nAfter logging in, your API key will be saved automatically. The key never passes through this conversation.`,
+        }],
+      };
     }
 
-    const msg =
-      result.error === "timeout" ? "Login timed out. Please try again." :
-      result.error === "key_already_exists" ? "You already have a Pipelex API key. Check ~/.pipelex/.env." :
-      `Connection failed: ${result.error}. Please try again.`;
-
-    return { content: [{ type: "text", text: msg }] };
+    return { content: [{ type: "text", text: "Failed to start authentication flow." }] };
   },
 );
 
