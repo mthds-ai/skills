@@ -83,6 +83,10 @@ h1{margin:0 0 8px;font-size:24px;color:#15803d}p{margin:0;color:#666}
 </style></head>
 <body><div class="c"><h1>&#10003; Connected to Pipelex!</h1><p>You can close this tab and return to Claude.</p></div></body></html>`;
 
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function errorHtml(msg) {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Failed</title>
@@ -91,7 +95,7 @@ body{font-family:-apple-system,system-ui,sans-serif;display:flex;justify-content
 .c{text-align:center;background:#fff;padding:48px;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);max-width:400px}
 h1{margin:0 0 8px;font-size:24px;color:#dc2626}p{margin:0;color:#666}
 </style></head>
-<body><div class="c"><h1>&#10007; Connection Failed</h1><p>${msg}</p><p style="margin-top:12px">Return to Claude and try again.</p></div></body></html>`;
+<body><div class="c"><h1>&#10007; Connection Failed</h1><p>${escapeHtml(msg)}</p><p style="margin-top:12px">Return to Claude and try again.</p></div></body></html>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -135,6 +139,8 @@ function startAuthFlow(provider) {
 
       res.writeHead(400, { "Content-Type": "text/html" });
       res.end(errorHtml("No key received"));
+      cleanup();
+      resolve({ status: "not_connected", error: "no_key" });
     });
 
     function cleanup() {
