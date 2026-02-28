@@ -156,7 +156,7 @@ function startAuthFlow(provider) {
     server.listen(0, "127.0.0.1", () => {
       const port = server.address().port;
       const callback = `http://localhost:${port}/callback`;
-      const authUrl = `${PIPELEX_API_URL}/auth/${provider}?cli_redirect=${encodeURIComponent(callback)}`;
+      const authUrl = `${PIPELEX_API_URL}/login/${provider}?cli_redirect=${encodeURIComponent(callback)}`;
 
       // Try to open browser, but also return the URL in case exec is blocked (e.g. Electron sandbox)
       exec(`/usr/bin/open "${authUrl}"`, () => {});
