@@ -19,20 +19,10 @@ If it fails, ASK the user if they want to install it. If YES, run `npm install -
 To RUN methods, the user needs the `pipelex` runtime. ASK the user if they want to install it. If YES:
 
 ```bash
-mthds-agent runner setup pipelex
-```
-
-This installs the pipelex binary. It does NOT configure anything.
-
-If this fails (e.g., in sandboxed environments where the install script is blocked), install via pip instead:
-
-```bash
 pip install pipelex
 ```
 
 Ensure the install directory is on PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`).
-
-> **Note**: In Claude Cowork sandbox environments, `pip` is available out of the box — use `pip install pipelex` directly instead of trying the runner setup first.
 
 ### 3. Initialize pipelex configuration
 
@@ -277,8 +267,6 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 
 | Command | Purpose | Example |
 |---------|---------|---------|
-| `mthds-agent runner setup pipelex` | Install the pipelex runtime (does not configure) | `mthds-agent runner setup pipelex` |
-| `mthds-agent runner setup api` | Set up the API runner credentials | `mthds-agent runner setup api --api-key sk-...` |
 | `mthds-agent pipelex init` | Initialize pipelex configuration (non-interactive) | `mthds-agent pipelex init -g --config '{"backends": ["openai"]}'` |
 | `mthds-agent pipelex run pipe` | Execute a pipeline (compact output by default; use `--with-memory` for full envelope) | `mthds-agent pipelex run pipe <bundle-dir>/` |
 | `mthds-agent pipelex validate pipe` | Validate a bundle or pipe | `mthds-agent pipelex validate pipe bundle.mthds` |
