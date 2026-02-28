@@ -23,8 +23,9 @@ import { parse } from "node:url";
 // Config
 // ---------------------------------------------------------------------------
 
-const PIPELEX_API_URL = process.env.PIPELEX_API_URL ?? "https://app-staging.pipelex.com";
-const AUTH_TIMEOUT_MS = 120_000;
+const PIPELEX_API_URL = process.env.PIPELEX_API_URL ?? "https://api-staging.pipelex.com";
+const ENV_KEY_NAME = "PIPELEX_GATEWAY_API_KEY";
+const AUTH_TIMEOUT_MS = 300_000; // 5 minutes — enough for slow OAuth flows
 
 // ---------------------------------------------------------------------------
 // Filesystem
@@ -36,40 +37,30 @@ const ENV_FILE = join(ENV_DIR, ".env");
 function readApiKey() {
   if (!existsSync(ENV_FILE)) return null;
   const content = readFileSync(ENV_FILE, "utf-8");
-  const match = content.match(/^PIPELEX_API_KEY=(.+)$/m);
+  const re = new RegExp(`^${ENV_KEY_NAME}=(.+)$`, "m");
+  const match = content.match(re);
   return match?.[1]?.trim() || null;
 }
 
 function writeApiKey(key) {
   if (!existsSync(ENV_DIR)) mkdirSync(ENV_DIR, { recursive: true });
 
+  const reTest = new RegExp(`^${ENV_KEY_NAME}=`, "m");
+  const reReplace = new RegExp(`^${ENV_KEY_NAME}=.*$`, "m");
+
   let content = "";
   if (existsSync(ENV_FILE)) {
     content = readFileSync(ENV_FILE, "utf-8");
-    if (/^PIPELEX_API_KEY=/m.test(content)) {
-      content = content.replace(/^PIPELEX_API_KEY=.*$/m, `PIPELEX_API_KEY=${key}`);
+    if (reTest.test(content)) {
+      content = content.replace(reReplace, `${ENV_KEY_NAME}=${key}`);
     } else {
-      content = content.trimEnd() + `\nPIPELEX_API_KEY=${key}\n`;
+      content = content.trimEnd() + `\n${ENV_KEY_NAME}=${key}\n`;
     }
   } else {
-    content = `PIPELEX_API_KEY=${key}\n`;
+    content = `${ENV_KEY_NAME}=${key}\n`;
   }
 
   writeFileSync(ENV_FILE, content);
-}
-
-// ---------------------------------------------------------------------------
-// Browser (cross-platform)
-// ---------------------------------------------------------------------------
-
-function openBrowser(url) {
-  const cmd =
-    process.platform === "darwin" ? "/usr/bin/open" :
-    process.platform === "win32" ? "start" :
-    "xdg-open";
-  exec(`${cmd} "${url}"`, (err) => {
-    if (err) console.error("Failed to open browser:", err.message);
-  });
 }
 
 // ---------------------------------------------------------------------------
@@ -101,14 +92,34 @@ h1{margin:0 0 8px;font-size:24px;color:#dc2626}p{margin:0;color:#666}
 }
 
 // ---------------------------------------------------------------------------
-// Auth flow
+// Persistent callback server
 // ---------------------------------------------------------------------------
+// The HTTP server lives at module level so it survives across MCP tool calls.
+// It starts when connect_pipelex is called and stays alive until:
+//   - the callback is received (key or error)
+//   - the timeout fires (5 min)
+//   - the MCP process exits
+
+let callbackServer = null;
+let callbackTimeout = null;
+
+function shutdownCallbackServer() {
+  if (callbackTimeout) {
+    clearTimeout(callbackTimeout);
+    callbackTimeout = null;
+  }
+  if (callbackServer) {
+    callbackServer.close();
+    callbackServer = null;
+  }
+}
 
 function startAuthFlow(provider) {
-  return new Promise((resolve) => {
-    let done = false;
+  // Shut down any previous callback server
+  shutdownCallbackServer();
 
-    const server = createServer((req, res) => {
+  return new Promise((resolve) => {
+    const httpServer = createServer((req, res) => {
       const { pathname, query } = parse(req.url, true);
       if (pathname !== "/callback") {
         res.writeHead(404);
@@ -125,8 +136,7 @@ function startAuthFlow(provider) {
           : String(error);
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(errorHtml(msg));
-        cleanup();
-        resolve({ status: "not_connected", error: String(error) });
+        shutdownCallbackServer();
         return;
       }
 
@@ -134,59 +144,35 @@ function startAuthFlow(provider) {
         writeApiKey(String(key));
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(SUCCESS_HTML);
-        cleanup();
-        resolve({ status: "connected" });
+        shutdownCallbackServer();
         return;
       }
 
       res.writeHead(400, { "Content-Type": "text/html" });
       res.end(errorHtml("No key received"));
-      cleanup();
-      resolve({ status: "not_connected", error: "no_key" });
+      shutdownCallbackServer();
     });
 
-    function cleanup() {
-      if (!done) {
-        done = true;
-        server.close();
-      }
-    }
+    // Keep reference at module level so it persists
+    callbackServer = httpServer;
 
     // Port 0 = OS picks a free port
-    server.listen(0, "127.0.0.1", () => {
-      const port = server.address().port;
+    httpServer.listen(0, "127.0.0.1", () => {
+      const port = httpServer.address().port;
       const callback = `http://localhost:${port}/callback`;
       const authUrl = `${PIPELEX_API_URL}/login/${provider}?cli_redirect=${encodeURIComponent(callback)}`;
 
-      // Try to open browser, but also return the URL in case exec is blocked (e.g. Electron sandbox)
+      // Try to open browser (may fail in Electron sandbox — that's OK)
       exec(`/usr/bin/open "${authUrl}"`, () => {});
 
-      // Resolve immediately with the URL so the LLM can present it as a clickable link
-      resolve({ status: "waiting", authUrl });
-
-      setTimeout(() => {
-        if (!done) {
-          cleanup();
-        }
+      // Auto-cleanup after timeout
+      callbackTimeout = setTimeout(() => {
+        shutdownCallbackServer();
       }, AUTH_TIMEOUT_MS);
-    });
-  });
-}
 
-// Wait for the callback server to receive the key (called after startAuthFlow)
-function waitForCallback(timeout = AUTH_TIMEOUT_MS) {
-  return new Promise((resolve) => {
-    const start = Date.now();
-    const interval = setInterval(() => {
-      const key = readApiKey();
-      if (key) {
-        clearInterval(interval);
-        resolve({ status: "connected" });
-      } else if (Date.now() - start > timeout) {
-        clearInterval(interval);
-        resolve({ status: "not_connected", error: "timeout" });
-      }
-    }, 1000);
+      // Resolve immediately so the LLM can show the URL as a clickable link
+      resolve({ status: "waiting", authUrl });
+    });
   });
 }
 
@@ -194,9 +180,9 @@ function waitForCallback(timeout = AUTH_TIMEOUT_MS) {
 // MCP Server
 // ---------------------------------------------------------------------------
 
-const server = new McpServer({ name: "pipelex", version: "0.0.1" });
+const mcpServer = new McpServer({ name: "pipelex", version: "0.0.1" });
 
-server.tool(
+mcpServer.tool(
   "check_pipelex_auth",
   "Check if the user has connected their Pipelex account",
   {},
@@ -213,7 +199,7 @@ server.tool(
   },
 );
 
-server.tool(
+mcpServer.tool(
   "connect_pipelex",
   "Connect to Pipelex. IMPORTANT: This tool returns a login URL that you MUST display as a clickable markdown link to the user. After they log in, call check_pipelex_auth to verify.",
   { provider: z.enum(["google", "github"]).default("google").describe("OAuth provider") },
@@ -238,4 +224,4 @@ server.tool(
 );
 
 const transport = new StdioServerTransport();
-await server.connect(transport);
+await mcpServer.connect(transport);
