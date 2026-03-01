@@ -1,0 +1,23 @@
+.claude/skills/release/SKILL.md
+  33e09862011293da 4-5,7-8,13-14,16-20,27,32-33,48-49,51-53,55-56,60,81-82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "0bf17df0bae4ba900082201bc90bba9698d897b0",
+  "prompts": {
+    "33e09862011293da": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a3891e49-0d08-4c1d-ae3b-c5b5316ab80a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 24,
+      "overriden_lines": 0
+    }
+  }
+}
