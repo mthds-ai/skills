@@ -1,0 +1,38 @@
+.claude-plugin/marketplace.json
+  53a442189737331e 9
+.claude-plugin/plugin.json
+  53a442189737331e 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "8c605a0e14e7f3c752f939a340acc0136b7016ce",
+  "prompts": {
+    "33e09862011293da": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a3891e49-0d08-4c1d-ae3b-c5b5316ab80a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 27,
+      "total_deletions": 18,
+      "accepted_lines": 24,
+      "overriden_lines": 0
+    },
+    "53a442189737331e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6356a53e-ffb4-4da8-8ed2-ad3df2e18ec4",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    }
+  }
+}
