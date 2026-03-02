@@ -224,7 +224,7 @@ mthds-agent pipelex pipe --spec '{
   "inputs": {"topic": "Text"},
   "output": "SearchResult",
   "search_talent": "web-search",
-  "prompt": "What is $topic?"
+  "prompt": "What is the latest news on $topic?"
 }'
 ```
 
