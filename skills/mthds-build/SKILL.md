@@ -172,7 +172,7 @@ For each concept, draft:
 - **Description**: What it represents
 - **Type**: Either `refines: NativeConcept` OR `structure: {...}`
 
-**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](../shared/mthds-reference.md#native-concepts)
+**Native concepts** (built-in, do NOT redefine): `Text`, `Html`, `Image`, `Document`, `Number`, `Page`, `TextAndImages`, `ImgGenPrompt`, `JSON`, `SearchResult`, `Anything`, `Dynamic`. See [MTHDS Language Reference — Native Concepts](../shared/mthds-reference.md#native-concepts)
 
 > **Note**: `Document` is the native concept for any document (PDF, Word, etc.). `Image` is for any image format (JPEG, PNG, etc.). File formats like "PDF" or "JPEG" are not concepts.
 
@@ -243,6 +243,7 @@ items = {type = "list", item_type = "concept", item_concept_ref = "my_domain.Oth
 | **PipeExtract** | Extract content from PDF/Image → Page[] |
 | **PipeCompose** | Template text or construct objects |
 | **PipeImgGen** | Generate images from text prompts |
+| **PipeSearch** | Search the web for information → SearchResult |
 | **PipeFunc** | Custom Python logic |
 
 > **Note**: `Page[]` outputs from PipeExtract automatically convert to text when inserted into prompts using `@variable`.
@@ -280,11 +281,12 @@ Default to talent names from [Talents and Presets](references/talents-and-preset
 mthds-agent pipelex models --type llm          # when structuring PipeLLM pipes
 mthds-agent pipelex models --type extract      # when structuring PipeExtract pipes
 mthds-agent pipelex models --type img_gen      # when structuring PipeImgGen pipes
+mthds-agent pipelex models --type search       # when structuring PipeSearch pipes
 ```
 
 Prepare JSON specs for all pipes, then convert them **in parallel** by making multiple concurrent tool calls.
 
-For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, PipeCondition, PipeCompose, PipeParallel, PipeExtract, PipeImgGen), see [Manual Build Phases](references/manual-build-phases.md#phase-7-pipe-type-cli-examples).
+For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, PipeCondition, PipeCompose, PipeParallel, PipeExtract, PipeImgGen, PipeSearch), see [Manual Build Phases](references/manual-build-phases.md#phase-7-pipe-type-cli-examples).
 
 **Output**: Validated pipe TOML fragments
 

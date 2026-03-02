@@ -210,7 +210,7 @@ else:
 
 | Pipe Type | `main_stuff` present? | What to show |
 |-----------|----------------------|--------------|
-| PipeLLM, PipeCompose, PipeExtract, PipeImgGen | Always | `main_stuff` |
+| PipeLLM, PipeCompose, PipeExtract, PipeImgGen, PipeSearch | Always | `main_stuff` |
 | PipeSequence | Always (last step) | `main_stuff` |
 | PipeBatch | Always (list) | `main_stuff` |
 | PipeCondition | Always | `main_stuff` |

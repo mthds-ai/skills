@@ -34,3 +34,10 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 | `gen-image` | `$gen-image` |
 | `gen-image-fast` | `$gen-image-fast` |
 | `gen-image-high-quality` | `$gen-image-high-quality` |
+
+## Search Talents → Model Presets
+
+| Talent | Model Preset |
+|--------|--------------|
+| `web-search` | `$web-search` |
+| `web-search-deep` | `$web-search-deep` |
