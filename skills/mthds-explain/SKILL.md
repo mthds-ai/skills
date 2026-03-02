@@ -59,7 +59,7 @@ Starting from the main pipe, trace the execution path:
 2. For **PipeBatch**: identify `batch_over` and `batch_as`, then the inner pipe
 3. For **PipeParallel**: list all branches
 4. For **PipeCondition**: map condition → pipe for each branch
-5. For **PipeLLM / PipeExtract / PipeImgGen / PipeFunc**: these are leaf operations
+5. For **PipeLLM / PipeExtract / PipeImgGen / PipeSearch / PipeFunc**: these are leaf operations
 
 ### Step 4: Present Explanation
 

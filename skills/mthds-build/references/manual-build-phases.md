@@ -215,6 +215,19 @@ mthds-agent pipelex pipe --spec '{
 }'
 ```
 
+### PipeSearch
+```bash
+mthds-agent pipelex pipe --spec '{
+  "type": "PipeSearch",
+  "pipe_code": "search_topic",
+  "description": "Search the web for information",
+  "inputs": {"topic": "Text"},
+  "output": "SearchResult",
+  "search_talent": "web-search",
+  "prompt": "What is $topic?"
+}'
+```
+
 ### Parallel Conversion Example (multiple pipes at once)
 ```bash
 # Call all pipe commands in parallel (single response, multiple tool calls):

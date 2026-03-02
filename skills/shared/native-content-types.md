@@ -20,6 +20,7 @@ Each native concept maps to a content class with specific attributes. Understand
 | `Page` | PageContent | `text_and_images` (TextAndImagesContent), `page_view` (ImageContent) |
 | `JSON` | JSONContent | `json_obj` |
 | `ImgGenPrompt` | *(refines Text)* | `text` |
+| `SearchResult` | SearchResultContent | `answer`, `sources` (list of SearchSourceContent) |
 | `Anything` | *(any content)* | depends on actual content |
 | `Dynamic` | DynamicContent | user-defined fields |
 
@@ -121,6 +122,27 @@ Represents a single page extracted from a document. Produced by PipeExtract when
 
 ---
 
+### SearchResult — `SearchResultContent`
+
+Represents the result of a web search query. Produced by PipeSearch.
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `answer` | `str` | The synthesized answer text from the search |
+| `sources` | `list[SearchSourceContent]` | List of sources that contributed to the answer |
+
+Each `SearchSourceContent` has:
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `name` | `str` | yes | Source name/title |
+| `url` | `str` | yes | Source URL |
+| `snippet` | `str \| None` | no | Relevant excerpt from the source |
+
+**Access**: `$result.answer` for the answer text, `$result.sources` for the source list. When used with `@result` in a prompt, the answer and sources are auto-rendered.
+
+---
+
 ### ListContent (multiplicity `[]`)
 
 When a concept has `[]` multiplicity (e.g., `Page[]`, `Image[]`), the content is a `ListContent` wrapping a list of items:
@@ -176,6 +198,7 @@ page_text = { from = "page.text_and_images.text.text" }
   "my_number": {"concept": "native.Number", "content": {"number": 42}},
   "my_image": {"concept": "native.Image", "content": {"url": "/path/to/img.jpg", "mime_type": "image/jpeg"}},
   "my_document": {"concept": "native.Document", "content": {"url": "/path/to/doc.pdf"}},
-  "my_json": {"concept": "native.JSON", "content": {"json_obj": {"key": "value"}}}
+  "my_json": {"concept": "native.JSON", "content": {"json_obj": {"key": "value"}}},
+  "my_search_result": {"concept": "native.SearchResult", "content": {"answer": "The answer text", "sources": [{"name": "Source 1", "url": "https://example.com", "snippet": "Relevant excerpt"}]}}
 }
 ```

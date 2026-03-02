@@ -37,7 +37,7 @@ Your prompt here with @block_var and $inline_var
 
 ## Native Concepts
 
-Use directly without defining: `Text`, `Image`, `Document`, `TextAndImages`, `Number`, `Page`, `JSON`, `ImgGenPrompt`, `Html`, `Anything`, `Dynamic`
+Use directly without defining: `Text`, `Image`, `Document`, `TextAndImages`, `Number`, `Page`, `JSON`, `ImgGenPrompt`, `Html`, `SearchResult`, `Anything`, `Dynamic`
 
 > **Note**: `Document` is the native concept for any document (PDF, Word, etc.). `Image` is for any image format (JPEG, PNG, etc.). File formats like "PDF" or "JPEG" are not concepts.
 
@@ -336,6 +336,24 @@ aspect_ratio = "landscape_16_9"
 `square`, `landscape_4_3`, `landscape_3_2`, `landscape_16_9`, `landscape_21_9`, `portrait_3_4`, `portrait_2_3`, `portrait_9_16`, `portrait_9_21`
 
 **Common mistake:** The `prompt` field is required separately from inputs - you must explicitly reference the input variable.
+
+### PipeSearch - Search the web
+
+```toml
+[pipe.search_topic]
+type = "PipeSearch"
+description = "Search the web for information"
+inputs = { topic = "Text" }
+output = "SearchResult"
+model = "$linkup-standard"
+prompt = "What is $topic?"
+```
+
+**Required fields:**
+- `prompt` - Search query, supports `$variable` template syntax for dynamic queries
+- `model` - Search preset (e.g., `"$linkup-standard"`, `"$linkup-deep"`)
+
+Output is always `SearchResult` (contains `answer` text and `sources` list with name, URL, and snippet for each source).
 
 ### PipeFunc - Custom Python functions
 
