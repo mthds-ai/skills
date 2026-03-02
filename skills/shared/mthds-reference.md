@@ -353,7 +353,7 @@ prompt = "What is $topic?"
 - `prompt` - Search query, supports `$variable` template syntax for dynamic queries
 - `model` - Search preset (e.g., `"$linkup-standard"`, `"$linkup-deep"`)
 
-Output is always `SearchResult` (contains `answer` text and `sources` list with name, URL, and snippet for each source).
+Output must be `SearchResult` or a concept that refines `SearchResult` (contains `answer` text and `sources` list with name, URL, and snippet for each source).
 
 ### PipeFunc - Custom Python functions
 

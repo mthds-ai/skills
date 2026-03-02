@@ -3,7 +3,7 @@
 The agent CLI uses human-friendly "talent" names that map to model presets. This shields you from needing to know specific model names.
 
 > **Check availability**: Run `mthds-agent pipelex models` to verify which presets, aliases, and talent mappings are actually available in the current environment before referencing them in a bundle.
-> Use `--type` (`llm`, `extract`, `img_gen`) to filter by category and `--backend` to filter by provider.
+> Use `--type` (`llm`, `extract`, `img_gen`, `search`) to filter by category and `--backend` to filter by provider.
 
 ## LLM Talents → Model Presets
 
@@ -39,5 +39,5 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 
 | Talent | Model Preset |
 |--------|--------------|
-| `web-search` | `$web-search` |
-| `web-search-deep` | `$web-search-deep` |
+| `web-search` | `$linkup-standard` |
+| `web-search-deep` | `$linkup-deep` |
