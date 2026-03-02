@@ -1,0 +1,23 @@
+skills/mthds-build/SKILL.md
+  9349f5eea176ee95 301
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "a1065d43768a0556e140977d3315dee3d0417d7a",
+  "prompts": {
+    "9349f5eea176ee95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bab113c5-4447-40b1-8348-e47253545f1d",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
