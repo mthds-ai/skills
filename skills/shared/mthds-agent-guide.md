@@ -264,7 +264,7 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 | `mthds-agent pipelex inputs pipe` | Generate example input JSON | `mthds-agent pipelex inputs pipe bundle.mthds` |
 | `mthds-agent pipelex concept` | Structure a concept from JSON spec | `mthds-agent pipelex concept --spec '{...}'` |
 | `mthds-agent pipelex pipe` | Structure a pipe from JSON spec | `mthds-agent pipelex pipe --spec '{"type": "PipeLLM", ...}'` |
-| `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts | `mthds-agent pipelex assemble --domain my_domain ...` |
+| `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts (returns TOML in JSON by default; use `--output` to write to file) | `mthds-agent pipelex assemble --domain my_domain ...` |
 | `mthds-agent pipelex models` | List available model presets and talent mappings | `mthds-agent pipelex models` / `mthds-agent pipelex models -t llm -b anthropic` |
 | `mthds-agent pipelex doctor` | Check config health and auto-fix | `mthds-agent pipelex doctor` |
 | `mthds-agent install` | Install a method package from GitHub or local directory | `mthds-agent install org/repo --agent claude-code --location local` |

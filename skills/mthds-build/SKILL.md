@@ -4,7 +4,7 @@ min_mthds_version: 0.0.13
 description: Build new AI method from scratch using the MTHDS standard (.mthds bundle files). Use when user says "create a pipeline", "build a workflow", "new .mthds file", "make a method", "design a pipe", or wants to create any new method from scratch. Guides the user through a 10-phase construction process.
 ---
 
-# Build AI Method using the MTHDS standard (Agentic)
+# Build AI Method using the MTHDS standard
 
 Create new MTHDS bundles through an adaptive, phase-based approach. This skill guides you through drafting (markdown), structuring (CLI/JSON), and assembling complete .mthds bundles.
 
@@ -297,6 +297,8 @@ For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, 
 **Goal**: Combine all parts into a complete .mthds file.
 
 **Save location**: Always save method bundles to `mthds-wip/`. Do not ask the user for the save location.
+
+Call assemble to get the TOML in the JSON response (in the `toml` field). Then save it using the **Write** tool to `mthds-wip/<bundle_dir>/bundle.mthds` — this triggers the PostToolUse hook for automatic lint/format/validate.
 
 For the assemble CLI command and direct .mthds writing examples, see [Manual Build Phases](references/manual-build-phases.md#phase-8-assemble-bundle).
 
