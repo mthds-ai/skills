@@ -1,0 +1,40 @@
+skills/mthds-build/SKILL.md
+  e74a3619dff3ec36 289
+.claude-plugin/plugin.json
+  ad5d74febeb52f7a 4
+.claude-plugin/marketplace.json
+  ad5d74febeb52f7a 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "c90649b990a3367e50bda6a42fcba5e9c10a713f",
+  "prompts": {
+    "ad5d74febeb52f7a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a8c0049a-2ce8-4554-9199-0c7bec52240c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    },
+    "e74a3619dff3ec36": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "974b722a-a0bf-4111-bfa1-9bd4a16f2b32",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
