@@ -1,0 +1,23 @@
+skills/mthds-pipelex-setup/SKILL.md
+  9349f5eea176ee95 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.7",
+  "base_commit_sha": "2a3a8a7798215c83a55fc1f58fc748be92227ee9",
+  "prompts": {
+    "9349f5eea176ee95": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bab113c5-4447-40b1-8348-e47253545f1d",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
