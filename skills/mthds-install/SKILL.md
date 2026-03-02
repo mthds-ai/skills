@@ -38,6 +38,8 @@ Run `mthds-agent --version`. The minimum required version is **0.0.13** (declare
 
 Do not attempt manual installation. The CLI handles resolution, file placement, shim generation, and runtime setup.
 
+> **No backend setup needed**: This skill works without configuring inference backends or API keys. You can start building/validating methods right away. Backend configuration is only needed to run methods with live inference — use `/pipelex-setup` when you're ready.
+
 ### Step 1: Identify the Source
 
 Determine where the method package lives:

@@ -4,52 +4,43 @@ All skills in this plugin require `mthds-agent >= 0.0.13`. The Step 0 CLI Check 
 
 ## IMPORTANT PREREQUISITES
 
-Before working, or if there is any doubt about the CLI, check the following in order:
+Before working, or if there is any doubt about the CLI, check the following in order.
 
-### 1. Check if `mthds` is installed
+### Tier 1 — Required for all skills (low friction)
+
+These two CLIs are needed for building, validating, editing, explaining, fixing, and preparing inputs — no API keys or backend configuration required.
+
+#### 1. Check if `mthds-agent` is installed
 
 ```bash
-mthds --version
+mthds-agent --version
 ```
 
 If it fails, ASK the user if they want to install it. If YES, run `npm install -g mthds`.
 
-### 2. Check if the `pipelex` runtime is installed
-
-To RUN methods, the user needs the `pipelex` runtime. ASK the user if they want to install it. If YES:
+#### 2. Check if `pipelex-agent` is installed
 
 ```bash
-pip install pipelex
+pipelex-agent --version
 ```
 
-Ensure the install directory is on PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`).
-
-### 3. Initialize pipelex configuration
-
-After pipelex is installed, it needs to be configured. **You MUST ask the user ALL of the following questions BEFORE running any init command. Do NOT run the CLI until you have all answers.**
-
-**Question 1 — Backends:** Ask the user which AI backends they want to enable. Examples: `openai`, `anthropic`, `pipelex_gateway`. Run `mthds-agent pipelex init --help` to discover all available options.
-
-**Question 2 — Gateway terms (only if `pipelex_gateway` was chosen):** Ask the user: "Do you accept the Pipelex Gateway Terms of Service and Privacy Policy? See: https://www.pipelex.com/privacy-policy". Only set `"accept_gateway_terms": true` if the user explicitly says yes. If they decline, remove `pipelex_gateway` from the backends list.
-
-**Question 3 — Telemetry:** Ask the user: "Do you want anonymous telemetry enabled?" Options: `"off"` (no telemetry) or `"anonymous"` (anonymous usage data).
-
-**Only after collecting all answers**, build the JSON config and run:
+If it fails, ASK the user if they want to install it. If YES:
 
 ```bash
-# Example without pipelex_gateway:
-mthds-agent pipelex init -g --config '{"backends": ["openai"], "telemetry_mode": "off"}'
-
-# Example with pipelex_gateway (user accepted terms):
-mthds-agent pipelex init -g --config '{"backends": ["pipelex_gateway", "openai"], "accept_gateway_terms": true, "telemetry_mode": "anonymous"}'
+curl -fsSL https://pipelex.com/install.sh | sh
 ```
 
-- `-g` targets the global `~/.pipelex/` directory. Without it, targets project-level `.pipelex/` (requires a project root).
-- Config JSON schema: `{"backends": list[str], "primary_backend": str, "accept_gateway_terms": bool, "telemetry_mode": str}`. All fields optional.
-- When `pipelex_gateway` is in backends, `accept_gateway_terms` must be set.
-- When 2+ backends are selected without `pipelex_gateway`, `primary_backend` is required.
+Or alternatively: `pip install pipelex`. Ensure the install directory is on PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`).
+
+> **Note**: The Pipelex runtime is needed for validation, formatting, and building — but NOT API keys or backend configuration. Users can start building and validating methods right away.
 
 FROM NOW ON, ASSUME THE CLI IS INSTALLED AND WORKING, and ONLY USE `mthds-agent` commands.
+
+### Tier 2 — Required only for running methods with live inference
+
+Backend configuration (API keys, model routing) is **only** needed to run methods with live inference. It is **not** needed for: building, validating, editing, explaining, fixing, preparing inputs, or dry-running methods.
+
+When a user needs to run methods with live inference, direct them to `/pipelex-setup` for guided configuration.
 
 ## Agent CLI
 
@@ -273,7 +264,7 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 | `mthds-agent pipelex inputs pipe` | Generate example input JSON | `mthds-agent pipelex inputs pipe bundle.mthds` |
 | `mthds-agent pipelex concept` | Structure a concept from JSON spec | `mthds-agent pipelex concept --spec '{...}'` |
 | `mthds-agent pipelex pipe` | Structure a pipe from JSON spec | `mthds-agent pipelex pipe --spec '{"type": "PipeLLM", ...}'` |
-| `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts | `mthds-agent pipelex assemble --domain my_domain ...` |
+| `mthds-agent pipelex assemble` | Assemble a .mthds bundle from parts (returns TOML in JSON by default; use `--output` to write to file) | `mthds-agent pipelex assemble --domain my_domain ...` |
 | `mthds-agent pipelex models` | List available model presets and talent mappings | `mthds-agent pipelex models` / `mthds-agent pipelex models -t llm -b anthropic` |
 | `mthds-agent pipelex doctor` | Check config health and auto-fix | `mthds-agent pipelex doctor` |
 | `mthds-agent install` | Install a method package from GitHub or local directory | `mthds-agent install org/repo --agent claude-code --location local` |

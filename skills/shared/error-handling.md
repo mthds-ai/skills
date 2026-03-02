@@ -128,7 +128,7 @@ Example output:
 | `FileNotFoundError` | Bundle file or input file not found | Check file paths are correct |
 | `JSONDecodeError` | Invalid JSON in inputs | Fix JSON syntax |
 | `ArgumentError` | Invalid CLI flag combination | Check command flags (e.g., `--mock-inputs` requires `--dry-run`) |
-| `BinaryNotFoundError` | A required binary (e.g., `pipelex-agent`) is not on PATH | Run `pip install pipelex`. Ensure the install directory is on PATH (e.g., `export PATH="$HOME/.local/bin:$PATH"`). |
+| `BinaryNotFoundError` | A required binary (e.g., `pipelex-agent`) is not on PATH | Install: `curl -fsSL https://pipelex.com/install.sh \| sh`. Then use `/pipelex-setup` to configure backends. |
 
 ## Cross-Domain Validation & Library Isolation
 

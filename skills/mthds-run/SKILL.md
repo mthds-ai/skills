@@ -38,6 +38,38 @@ Run `mthds-agent --version`. The minimum required version is **0.0.13** (declare
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 
+### Step 0.5 — Pipelex Runtime Check (mandatory)
+
+Running methods requires the Pipelex runtime to be installed and configured.
+
+**First**, check if `pipelex-agent` is available:
+
+```bash
+pipelex-agent --version
+```
+
+- **If the command is not found**: STOP. Tell the user:
+
+> The Pipelex runtime is not installed. Install it with:
+>
+> ```
+> curl -fsSL https://pipelex.com/install.sh | sh
+> ```
+
+**Then**, if `pipelex-agent` is installed, check configuration health:
+
+```bash
+mthds-agent pipelex doctor
+```
+
+- **If the doctor reports config issues (missing backends, missing API keys)** AND the user is requesting a **live run** (not `--dry-run`): STOP. Tell the user:
+
+> Pipelex needs to be configured with inference backends before running methods. Use `/pipelex-setup` for guided configuration.
+
+- **If the user is requesting a dry run** (`--dry-run`): config issues are OK — dry runs work without backend configuration. Proceed.
+
+- **If healthy**: proceed to Step 1.
+
 ### Step 1: Identify the Target
 
 | Target | Command |

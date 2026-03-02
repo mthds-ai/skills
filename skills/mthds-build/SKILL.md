@@ -4,7 +4,7 @@ min_mthds_version: 0.0.13
 description: Build new AI method from scratch using the MTHDS standard (.mthds bundle files). Use when user says "create a pipeline", "build a workflow", "new .mthds file", "make a method", "design a pipe", or wants to create any new method from scratch. Guides the user through a 10-phase construction process.
 ---
 
-# Build AI Method using the MTHDS standard (Agentic)
+# Build AI Method using the MTHDS standard
 
 Create new MTHDS bundles through an adaptive, phase-based approach. This skill guides you through drafting (markdown), structuring (CLI/JSON), and assembling complete .mthds bundles.
 
@@ -85,6 +85,8 @@ Run `mthds-agent --version`. The minimum required version is **0.0.13** (declare
 - **If the version is 0.0.13 or higher**: proceed to the next step.
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
+
+> **No backend setup needed**: This skill works without configuring inference backends or API keys. You can start building/validating methods right away. Backend configuration is only needed to run methods with live inference — use `/pipelex-setup` when you're ready.
 
 ---
 
@@ -295,6 +297,8 @@ For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, 
 **Goal**: Combine all parts into a complete .mthds file.
 
 **Save location**: Always save method bundles to `mthds-wip/`. Do not ask the user for the save location.
+
+Call assemble to get the TOML in the JSON response (in the `toml` field). Then save it using the **Write** tool to `mthds-wip/<bundle_dir>/bundle.mthds` — this triggers the PostToolUse hook for automatic lint/format/validate.
 
 For the assemble CLI command and direct .mthds writing examples, see [Manual Build Phases](references/manual-build-phases.md#phase-8-assemble-bundle).
 

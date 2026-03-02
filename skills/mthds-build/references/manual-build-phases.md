@@ -226,7 +226,7 @@ mthds-agent pipelex pipe --spec '{"type": "PipeSequence", "pipe_code": "main_pip
 
 ## Phase 8: Assemble Bundle
 
-Save concept and pipe TOML to temporary files, then assemble:
+Save concept and pipe TOML to temporary files, then assemble to stdout (returns JSON with a `toml` field):
 
 ```bash
 mthds-agent pipelex assemble \
@@ -234,9 +234,10 @@ mthds-agent pipelex assemble \
   --main-pipe main_pipe_code \
   --description "Description of the method" \
   --concepts concepts.toml \
-  --pipes pipes.toml \
-  --output mthds-wip/bundle.mthds
+  --pipes pipes.toml
 ```
+
+Parse the `toml` field from the JSON response and save it using the **Write** tool to `mthds-wip/<bundle_dir>/bundle.mthds`. This triggers the PostToolUse hook for automatic lint/format/validate.
 
 Or write the .mthds file directly following this structure:
 
