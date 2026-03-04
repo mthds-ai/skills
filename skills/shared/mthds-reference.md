@@ -345,15 +345,34 @@ type = "PipeSearch"
 description = "Search the web for information"
 inputs = { topic = "Text" }
 output = "SearchResult"
-model = "$linkup-standard"
+model = "$standard"
 prompt = "What is $topic?"
 ```
 
 **Required fields:**
 - `prompt` - Search query, supports `$variable` template syntax for dynamic queries
-- `model` - Search preset (e.g., `"$linkup-standard"`, `"$linkup-deep"`)
+- `model` - Search preset (e.g., `"$standard"`, `"$deep"`)
+
+**Optional filtering fields:**
+- `from_date` - Start date filter in YYYY-MM-DD format (e.g., `"2026-01-01"`)
+- `to_date` - End date filter in YYYY-MM-DD format
+- `include_domains` - Restrict search to these domains only (e.g., `["reuters.com", "bbc.com"]`)
+- `exclude_domains` - Exclude results from these domains
 
 Output must be `SearchResult` or a concept that refines `SearchResult` (contains `answer` text and `sources` list with name, URL, and snippet for each source).
+
+**Example with filters:**
+```toml
+[pipe.search_recent_news]
+type            = "PipeSearch"
+description     = "Search specific sources for recent news"
+inputs          = { topic = "Text" }
+output          = "SearchResult"
+model           = "$standard"
+prompt          = "What are the latest developments about $topic?"
+from_date       = "2026-01-01"
+include_domains = ["reuters.com", "apnews.com", "bbc.com"]
+```
 
 ### PipeFunc - Custom Python functions
 
