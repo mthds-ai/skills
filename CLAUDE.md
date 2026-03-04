@@ -49,7 +49,7 @@ make check       # Verify shared refs use ../shared/ paths and all shared files 
 `hooks/validate-mthds.sh` runs automatically after every Write or Edit on `.mthds` files. It:
 1. Lints with `mthds-agent plxt lint` (blocks on errors)
 2. Formats with `mthds-agent plxt fmt` (only if lint passes)
-3. Validates semantically with `mthds-agent pipelex validate pipe` (blocks or warns)
+3. Validates semantically with `mthds-agent pipelex validate bundle` (blocks or warns)
 
 Passes silently if `mthds-agent` is not installed or file is not `.mthds`.
 

@@ -104,12 +104,12 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 4. **Validate after editing**:
    ```bash
-   mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
+   mthds-agent pipelex validate bundle <file>.mthds -L <bundle-dir>/
    ```
    If errors, see [Error Handling Reference](../shared/error-handling.md) for recovery strategies by error domain. Use /mthds-fix skill for automatic error resolution.
 
 5. **Regenerate inputs if needed**:
-   - If inputs changed, run `mthds-agent pipelex inputs pipe <file>.mthds -L <bundle-dir>/`
+   - If inputs changed, run `mthds-agent pipelex inputs bundle <file>.mthds -L <bundle-dir>/`
    - Update existing inputs.json if present
 
 6. **Present completion**:

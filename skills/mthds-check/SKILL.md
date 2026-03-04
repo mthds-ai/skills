@@ -44,7 +44,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 2. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions):
    ```bash
-   mthds-agent pipelex validate pipe <file>.mthds -L <bundle-directory>/
+   mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/
    ```
 
 3. **Parse the JSON output**:
