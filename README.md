@@ -20,9 +20,14 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills plugin fo
 | `/mthds-publish` | Publish methods to mthds.sh (telemetry only, no file writes). |
 | `/mthds-share` | Share methods on social media (X, Reddit, LinkedIn). Pick specific platforms with `--platform`. |
 
-## Installation
 
-To install in Claude Code:
+## Installation in Claude Code
+
+Install the `mthds` npm package:
+
+```bash
+npm install -g mthds
+```
 
 Install the MTHDS skills marketplace:
 
@@ -43,16 +48,6 @@ then you must exit Claude Code and reopen it.
 ## Usage
 
 To use a skill, type `/mthds-<skill-name>` in Claude Code. For example: `/mthds-build`, `/mthds-run`, `/mthds-check`.
-
-## Prerequisites
-
-The `mthds-agent` CLI must be available in your environment:
-
-```bash
-mthds-agent --version
-```
-
-If not installed, install the `mthds` npm package: `npm install -g mthds`. For details, see [prerequisites](skills/shared/prerequisites.md).
 
 ## Project Structure
 
