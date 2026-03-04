@@ -257,7 +257,7 @@ For each input variable in the schema, attempt to match user-provided files:
 
 ### Step D: Copy Files to Output Directory
 
-Copy (or symlink) user files into `<output_dir>/inputs/` so `inputs.json` uses paths relative to the output directory. This keeps the pipeline directory self-contained. Only create the `inputs/` subdirectory if there are actual files to copy.
+Copy (or symlink) user files into `<output_dir>/inputs/` so `inputs.json` can reference them with paths **relative to the `inputs.json` file itself** (i.e., relative to the bundle directory where `inputs.json` lives). This keeps the pipeline directory self-contained. Only create the `inputs/` subdirectory if there are actual files to copy.
 
 Use descriptive filenames: if the input variable is `invoice`, copy to `<output_dir>/inputs/invoice.pdf` (preserving original extension).
 
@@ -270,7 +270,7 @@ For each matched file, construct the proper content object:
 {
   "concept": "native.Document",
   "content": {
-    "url": "<output_dir>/inputs/invoice.pdf",
+    "url": "inputs/invoice.pdf",
     "mime_type": "application/pdf"
   }
 }
@@ -281,7 +281,7 @@ For each matched file, construct the proper content object:
 {
   "concept": "native.Image",
   "content": {
-    "url": "<output_dir>/inputs/photo.jpg",
+    "url": "inputs/photo.jpg",
     "mime_type": "image/jpeg"
   }
 }
@@ -302,9 +302,9 @@ For each matched file, construct the proper content object:
 {
   "concept": "native.Image",
   "content": [
-    {"url": "<output_dir>/inputs/img_001.jpg", "mime_type": "image/jpeg"},
-    {"url": "<output_dir>/inputs/img_002.jpg", "mime_type": "image/jpeg"},
-    {"url": "<output_dir>/inputs/img_003.png", "mime_type": "image/png"}
+    {"url": "inputs/img_001.jpg", "mime_type": "image/jpeg"},
+    {"url": "inputs/img_002.jpg", "mime_type": "image/jpeg"},
+    {"url": "inputs/img_003.png", "mime_type": "image/png"}
   ]
 }
 ```
@@ -630,7 +630,7 @@ Save the `inputs` from the output directly to `mthds-wip/pipeline_01/inputs.json
   "image": {
     "concept": "native.Image",
     "content": {
-      "url": "mthds-wip/pipeline_01/inputs/city_street.jpg",
+      "url": "inputs/city_street.jpg",
       "mime_type": "image/jpeg"
     }
   },
@@ -652,7 +652,7 @@ User says: "Use my file `~/documents/invoice_march.pdf`"
 1. Get schema: needs `invoice` (Document) + `instructions` (Text)
 2. Inventory: user provided `invoice_march.pdf` (PDF = Document type)
 3. Match: `invoice_march.pdf` maps to `invoice` input (name similarity + type match)
-4. Copy: `cp ~/documents/invoice_march.pdf mthds-wip/pipeline_01/inputs/invoice.pdf`
+4. Copy: `cp ~/documents/invoice_march.pdf <output_dir>/inputs/invoice.pdf`
 5. Unfilled: `instructions` has no user file. Generate synthetic text: "Extract all line items, totals, and vendor information from this invoice."
 6. Assemble:
 ```json
@@ -660,7 +660,7 @@ User says: "Use my file `~/documents/invoice_march.pdf`"
   "invoice": {
     "concept": "native.Document",
     "content": {
-      "url": "mthds-wip/pipeline_01/inputs/invoice.pdf",
+      "url": "inputs/invoice.pdf",
       "mime_type": "application/pdf"
     }
   },
@@ -688,9 +688,9 @@ User says: "Use the photos in `./product-photos/`"
   "images": {
     "concept": "native.Image",
     "content": [
-      {"url": "mthds-wip/pipeline_01/inputs/shoe.jpg", "mime_type": "image/jpeg"},
-      {"url": "mthds-wip/pipeline_01/inputs/hat.png", "mime_type": "image/png"},
-      {"url": "mthds-wip/pipeline_01/inputs/bag.jpg", "mime_type": "image/jpeg"}
+      {"url": "inputs/shoe.jpg", "mime_type": "image/jpeg"},
+      {"url": "inputs/hat.png", "mime_type": "image/png"},
+      {"url": "inputs/bag.jpg", "mime_type": "image/jpeg"}
     ]
   }
 }
