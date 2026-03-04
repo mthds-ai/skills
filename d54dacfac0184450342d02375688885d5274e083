@@ -1,0 +1,27 @@
+skills/mthds-build/references/talents-and-presets.md
+  f130547beca270f1 42-43
+skills/mthds-edit/references/talents-and-presets.md
+  f130547beca270f1 42-43
+skills/shared/mthds-reference.md
+  f130547beca270f1 348,354,371
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "d54dacfac0184450342d02375688885d5274e083",
+  "prompts": {
+    "f130547beca270f1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "116a0f27-1ff9-420f-8b7b-98fd24a07c6a",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 8,
+      "total_deletions": 8,
+      "accepted_lines": 7,
+      "overriden_lines": 0
+    }
+  }
+}
