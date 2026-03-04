@@ -86,11 +86,11 @@ Use the /mthds-build skill for a guided 10-phase process: requirements → plan 
     └──────────┬───────────┘
                │ ok
                ▼
-    ┌──────────────────────┐
-    │  Run                 │
-    │  mthds-agent pipelex │
-    │  run pipe file.mthds │
-    └──────────┬───────────┘
+    ┌────────────────────────┐
+    │  Run                   │
+    │  mthds-agent pipelex   │
+    │  run bundle file.mthds │
+    └──────────┬─────────────┘
               │
               ▼
     ┌────────────────────┐
