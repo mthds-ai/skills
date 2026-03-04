@@ -29,8 +29,12 @@ Install the `mthds` npm package:
 npm install -g mthds
 ```
 
-Install the MTHDS skills marketplace:
+Start Claude Code:
+```bash
+claude
+```
 
+Tell Claude to install the MTHDS skills marketplace:
 ```bash
 /plugin marketplace add mthds-ai/skills
 ```
