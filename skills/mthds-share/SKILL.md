@@ -1,12 +1,12 @@
 ---
 name: mthds-share
 min_mthds_version: 0.1.0
-description: Publish a method to mthds.sh and share it on social media. Use when user says "share this method", "publish on mthds.sh", "post on social media", "share on X", "tweet about this method", or wants to publish and share an MTHDS method.
+description: Share MTHDS methods on social media (X/Twitter, Reddit, LinkedIn). Use when user says "share this method", "post on social media", "share on X", "share on Reddit", "share on LinkedIn", "tweet about this method", or wants to share a published method on social platforms.
 ---
 
-# Publish & Share MTHDS Methods
+# Share MTHDS methods on social media
 
-Publish a method package to mthds.sh (PostHog tracking) and optionally share it on X/Twitter.
+Generate share URLs for method packages and open them in the browser. Supports X (Twitter), Reddit, and LinkedIn.
 
 ## Process
 
@@ -24,85 +24,102 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user to upgrade.
+- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+
+> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+>
+> ```
+> npm install -g mthds@latest
+> ```
+>
+> Then re-run this skill.
 
 - **If the version is 0.1.0 or higher**: proceed to the next step.
 
-### Step 1: Identify the Source
+### Step 1: Ask the User
 
-Determine where the method package lives:
+Before sharing, **ask the user**:
 
-| Source | Syntax | Example |
-|--------|--------|---------|
-| GitHub (short) | `org/repo` | `mthds-ai/contract-analysis` |
-| GitHub (full URL) | `https://github.com/org/repo` | `https://github.com/mthds-ai/contract-analysis` |
-| Local directory | `--local <path>` | `--local ./my-methods/` |
+1. Which method(s) to share (address or local path)
+2. Which platforms they want to share on: **X (Twitter)**, **Reddit**, **LinkedIn** — or all of them
 
-### Step 2: Publish
+Do NOT share automatically. Always confirm the platforms with the user first.
 
-Run the publish command with `--share` to get the share URL:
+### Step 2: Run the Share Command
 
-**From GitHub**:
+**Get share URLs for all platforms** (default):
 
 ```bash
-mthds-agent publish <org/repo> --share
+mthds-agent share <org/repo>
 ```
 
-**From a local directory**:
+**Get share URLs for specific platforms** (use `--platform` once per platform):
 
 ```bash
-mthds-agent publish --local <path> --share
+mthds-agent share <org/repo> --platform x
+mthds-agent share <org/repo> --platform x --platform linkedin
+mthds-agent share <org/repo> --platform reddit --platform linkedin
 ```
 
-**Publish a specific method**:
+**Share a specific method from a multi-method package**:
 
 ```bash
-mthds-agent publish <org/repo> --method <name> --share
+mthds-agent share <org/repo> --method <name> --platform x
 ```
 
-### Step 3: Parse Output
+**Share from a local directory**:
+
+```bash
+mthds-agent share --local <path> --platform x --platform reddit
+```
+
+| Flag | Required | Values | Description |
+|------|----------|--------|-------------|
+| `[address]` | Yes* | `org/repo` | GitHub repo address |
+| `--local <path>` | Yes* | directory path | Share from a local directory |
+| `--method <name>` | No | method name | Share only one method from a multi-method package |
+| `--platform <name>` | No | `x`, `reddit`, `linkedin` | Platform to share on. Repeat for multiple. Defaults to all |
+
+*One of `address` or `--local` is required.
+
+### Step 3: Parse the Output
 
 On success, the CLI returns JSON:
 
 ```json
 {
   "success": true,
-  "published_methods": ["method-name"],
+  "methods": ["method-name"],
   "address": "org/repo",
   "share_urls": {
     "x": "https://twitter.com/intent/tweet?text=...",
-    "reddit": "https://www.reddit.com/submit?title=...&url=...",
-    "linkedin": "https://www.linkedin.com/sharing/share-offsite/?url=..."
+    "reddit": "https://www.reddit.com/submit?type=TEXT&title=...&text=...",
+    "linkedin": "https://www.linkedin.com/feed/?shareActive=true&text=..."
   }
 }
 ```
 
-### Step 4: Share on Social Media
+Only the platforms requested via `--platform` will appear in `share_urls`. If no `--platform` is specified, all three are returned.
 
-If the output includes `share_urls`, ask the user which platform they want to share on (X, Reddit, LinkedIn), then open the corresponding URL in the browser:
+### Step 4: Open in Browser
+
+After getting the URLs, open each one in the user's browser:
 
 ```bash
-open "<share_urls.x>"       # X/Twitter
-open "<share_urls.reddit>"  # Reddit
-open "<share_urls.linkedin>" # LinkedIn
+open "<url>"  # macOS
 ```
 
-### Step 5: Present Results
+Tell the user which browser tabs were opened.
 
-Tell the user:
-- Which methods were published
-- Whether the browser was opened for sharing
-- The share URL (in case they want to share manually)
-
-### Step 6: Handle Errors
+### Step 5: Handle Errors
 
 Common errors:
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| `Failed to resolve methods` | GitHub repo not found or no methods | Verify the address and that the repo contains METHODS.toml |
-| `Method "X" not found` | `--method` filter doesn't match | Check available method names in the package |
-| `No valid methods to publish` | No methods passed validation | Check METHODS.toml in the package |
+| `Invalid platform` | `--platform` value is not `x`, `reddit`, or `linkedin` | Use valid platform names |
+| `Failed to resolve methods` | GitHub repo not found or no methods in repo | Verify the address |
+| `Method "X" not found` | `--method` filter doesn't match any method | Check available method names |
 
 For all error types and recovery strategies, see [Error Handling Reference](../shared/error-handling.md).
 

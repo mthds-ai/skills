@@ -19,6 +19,7 @@
     "./skills/mthds-install",
     "./skills/mthds-pkg",
     "./skills/mthds-pipelex-setup",
+    "./skills/mthds-publish",
     "./skills/mthds-share"
   ]
 }

@@ -15,7 +15,10 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills plugin fo
 | `/fix` | Automatically fix validation errors in workflow bundles. Applies fixes and re-validates in a loop. |
 | `/run` | Execute MTHDS methods and interpret their JSON output. Supports dry runs, mock inputs, and graph generation. |
 | `/inputs` | Prepare inputs for workflows: placeholder templates, synthetic test data, user-provided files, or a mix. |
+| `/install` | Install method packages from GitHub or local directories. |
 | `/pkg` | Manage MTHDS packages — initialize, add dependencies, lock, install, update, and validate. |
+| `/publish` | Publish methods to mthds.sh (telemetry only, no file writes). |
+| `/share` | Share methods on social media (X, Reddit, LinkedIn). Pick specific platforms with `--platform`. |
 
 ## Installation
 
@@ -52,7 +55,10 @@ skills/
 ├── mthds-fix/          # Fix validation errors
 ├── mthds-run/          # Run pipelines
 ├── mthds-inputs/       # Prepare inputs (template, synthetic, user data)
+├── mthds-install/      # Install method packages
 ├── mthds-pkg/          # Package management
+├── mthds-publish/      # Publish methods to mthds.sh
+├── mthds-share/        # Share methods on social media
 └── shared/             # Shared references across all skills
     ├── prerequisites.md
     ├── error-handling.md
