@@ -68,7 +68,7 @@ Ask the user which backends they want to configure. Two paths:
 The Pipelex Gateway provides access to multiple AI models through a single API key.
 
 1. Ask the user: "Do you accept the Pipelex Gateway Terms of Service and Privacy Policy? See: https://www.pipelex.com/privacy-policy"
-2. If they accept: they need a gateway API key from app.pipelex.com
+2. If they accept: run `mthds-agent pipelex login` to log in to Pipelex and configure the `PIPELEX_GATEWAY_API_KEY`. This command handles authentication and key setup automatically.
 3. If they decline: proceed with Option B instead
 
 #### Option B — Bring Your Own Key (BYOK)
