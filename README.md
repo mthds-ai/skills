@@ -7,7 +7,7 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills plugin fo
 ## Skills
 
 | Skill | Description |
-|-------|-------------|
+|:----------------------|:------------|
 | `/mthds-build` | Build new AI method bundles from scratch. Supports both automated CLI build and guided 10-phase manual construction. |
 | `/mthds-check` | Validate workflow bundles for issues. Reports problems without modifying files (read-only analysis). |
 | `/mthds-edit` | Modify existing workflow bundles — change pipes, update prompts, rename concepts, add or remove steps. |
