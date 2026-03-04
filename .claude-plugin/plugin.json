@@ -1,7 +1,7 @@
 {
   "name": "mthds",
   "description": "Skills for building, running, validating, and editing AI methods following the MTHDS standard.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": {
     "name": "Pipelex staff",
     "email": "oss@pipelex.com"
