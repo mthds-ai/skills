@@ -45,7 +45,7 @@ When retrying a command after an error, increase the log level to capture diagno
 
 ```bash
 # Debug output for troubleshooting
-mthds-agent --log-level debug pipelex validate pipe bundle.mthds -L dir/
+mthds-agent --log-level debug pipelex validate bundle bundle.mthds -L dir/
 ```
 
 `--log-level debug` adds context on what the CLI is doing — internal resolution steps, model routing details, and validation traces — without overwhelming output.
@@ -60,7 +60,7 @@ mthds-agent --log-level debug pipelex validate pipe bundle.mthds -L dir/
 
 ## Validation Errors
 
-When `mthds-agent pipelex validate pipe` reports a `ValidateBundleError`, the JSON includes a `validation_errors` array:
+When `mthds-agent pipelex validate bundle` reports a `ValidateBundleError`, the JSON includes a `validation_errors` array:
 
 ```json
 {
@@ -136,7 +136,7 @@ Pipelex loads `.mthds` files into a flat namespace. **Always use directory mode 
 
 ```bash
 # ALWAYS use -L for validation (isolates from other bundles)
-mthds-agent pipelex validate pipe mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
+mthds-agent pipelex validate bundle mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
 
 # ALWAYS use directory mode or -L for running
 mthds-agent pipelex run bundle mthds-wip/pipeline_01/ --dry-run --mock-inputs
@@ -146,5 +146,5 @@ When a bundle references pipes/concepts from other domains, add multiple `-L` fl
 
 ```bash
 # Load the bundle's directory AND shared pipes
-mthds-agent pipelex validate pipe my_bundle.mthds -L ./my_bundle_dir/ -L ./shared_pipes/
+mthds-agent pipelex validate bundle my_bundle.mthds -L ./my_bundle_dir/ -L ./shared_pipes/
 ```

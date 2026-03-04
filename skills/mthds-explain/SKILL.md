@@ -89,7 +89,7 @@ Adapt the diagram style to the method structure (linear, branching, batched).
 
 If the user wants to confirm the method is valid:
 ```bash
-mthds-agent pipelex validate pipe <file>.mthds -L <bundle-dir>/
+mthds-agent pipelex validate bundle <file>.mthds -L <bundle-dir>/
 ```
 
 ### Step 7: Optional — Visual Graph
