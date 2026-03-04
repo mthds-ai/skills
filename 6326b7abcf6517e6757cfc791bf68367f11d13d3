@@ -1,0 +1,33 @@
+skills/mthds-explain/SKILL.md
+  bf2da81ac254f4fe 99
+skills/shared/error-handling.md
+  bf2da81ac254f4fe 142
+skills/mthds-run/SKILL.md
+  bf2da81ac254f4fe 77-80,157-162,172,175,262,272
+skills/shared/mthds-agent-guide.md
+  bf2da81ac254f4fe 106,148,152,155,165,223,249,252,262
+skills/mthds-inputs/SKILL.md
+  bf2da81ac254f4fe 358,543,546
+skills/mthds-build/SKILL.md
+  bf2da81ac254f4fe 323
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "6326b7abcf6517e6757cfc791bf68367f11d13d3",
+  "prompts": {
+    "bf2da81ac254f4fe": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5573d0d2-90e0-4380-9432-f6aa7b5f4973",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 29,
+      "total_deletions": 29,
+      "accepted_lines": 29,
+      "overriden_lines": 0
+    }
+  }
+}
