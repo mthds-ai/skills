@@ -39,5 +39,5 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 
 | Talent | Model Preset |
 |--------|--------------|
-| `web-search` | `$linkup-standard` |
-| `web-search-deep` | `$linkup-deep` |
+| `web-search` | `$standard` |
+| `web-search-deep` | `$deep` |

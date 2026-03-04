@@ -226,6 +226,19 @@ mthds-agent pipelex pipe --spec '{
   "search_talent": "web-search",
   "prompt": "What is the latest news on $topic?"
 }'
+
+# With optional date and domain filters:
+mthds-agent pipelex pipe --spec '{
+  "type": "PipeSearch",
+  "pipe_code": "search_recent_news",
+  "description": "Search specific sources for recent news",
+  "inputs": {"topic": "Text"},
+  "output": "SearchResult",
+  "search_talent": "web-search",
+  "prompt": "What are the latest developments about $topic?",
+  "from_date": "2026-01-01",
+  "include_domains": ["reuters.com", "apnews.com", "bbc.com"]
+}'
 ```
 
 ### Parallel Conversion Example (multiple pipes at once)
