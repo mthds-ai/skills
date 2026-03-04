@@ -139,7 +139,7 @@ Pipelex loads `.mthds` files into a flat namespace. **Always use directory mode 
 mthds-agent pipelex validate pipe mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
 
 # ALWAYS use directory mode or -L for running
-mthds-agent pipelex run pipe mthds-wip/pipeline_01/ --dry-run --mock-inputs
+mthds-agent pipelex run bundle mthds-wip/pipeline_01/ --dry-run --mock-inputs
 ```
 
 When a bundle references pipes/concepts from other domains, add multiple `-L` flags:
