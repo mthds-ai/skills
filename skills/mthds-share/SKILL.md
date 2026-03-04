@@ -103,10 +103,12 @@ Only the platforms requested via `--platform` will appear in `share_urls`. If no
 
 ### Step 4: Open in Browser
 
-After getting the URLs, open each one in the user's browser:
+After getting the URLs, open each one in the user's browser. Use the platform-appropriate command:
 
 ```bash
-open "<url>"  # macOS
+open "<url>"       # macOS
+xdg-open "<url>"   # Linux
+start "<url>"      # Windows
 ```
 
 Tell the user which browser tabs were opened.
