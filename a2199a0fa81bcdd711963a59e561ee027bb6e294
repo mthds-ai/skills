@@ -1,0 +1,23 @@
+skills/shared/mthds-agent-guide.md
+  86eefa9cfa686872 263
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "a2199a0fa81bcdd711963a59e561ee027bb6e294",
+  "prompts": {
+    "86eefa9cfa686872": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "55bb2e8b-8fc4-43b3-9d8c-d839e06db54f",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
