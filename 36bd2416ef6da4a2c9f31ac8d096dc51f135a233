@@ -1,0 +1,23 @@
+skills/mthds-inputs/SKILL.md
+  c84850e8ab102937 260,273,284,305-307,633,655,663,691-693
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.8",
+  "base_commit_sha": "36bd2416ef6da4a2c9f31ac8d096dc51f135a233",
+  "prompts": {
+    "c84850e8ab102937": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a6bca784-06f0-464e-8064-b8f915a6d729",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 12,
+      "total_deletions": 12,
+      "accepted_lines": 12,
+      "overriden_lines": 0
+    }
+  }
+}
