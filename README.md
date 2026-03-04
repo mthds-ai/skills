@@ -19,9 +19,16 @@ A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills plugin fo
 
 ## Installation
 
+To install in Claude Code:
+
 ```bash
-claude install-skill https://github.com/mthds-ai/skills
+/plugin marketplace add mthds-ai/skills
+/plugin install mthds@mthds-ai-skills
 ```
+
+## Usage
+
+To use a skill, type `/mthds-<skill-name>` in Claude Code. For example: `/mthds-build`, `/mthds-run`, `/mthds-check`.
 
 ## Prerequisites
 
