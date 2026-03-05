@@ -37,6 +37,22 @@ if [[ "$LINT_EXIT" -ne 0 ]]; then
   [[ -z "$LINT_OUTPUT" ]] && LINT_OUTPUT=$(cat "$TMPOUT")
   [[ -z "$LINT_OUTPUT" ]] && LINT_OUTPUT="lint exited with code $LINT_EXIT (no output)"
 
+  # --- Filter tracing noise (INFO/ERROR summary lines carry no diagnostic value) ---
+  LINT_OUTPUT=$(echo "$LINT_OUTPUT" | grep -v '^ INFO \|^ERROR ')
+
+  # --- Truncate cascading errors to first 3 error blocks ---
+  ERROR_COUNT=$(echo "$LINT_OUTPUT" | grep -c '^error:' || true)
+  if [[ "$ERROR_COUNT" -gt 3 ]]; then
+    LINT_OUTPUT=$(echo "$LINT_OUTPUT" | awk '/^error:/{n++} n<=3')
+    LINT_OUTPUT="$LINT_OUTPUT
+
+(+$((ERROR_COUNT - 3)) more errors, likely caused by the above)"
+  fi
+
+  # --- Shorten absolute paths to relative ---
+  CWD=$(pwd)
+  LINT_OUTPUT=$(echo "$LINT_OUTPUT" | sed "s|$CWD/||g")
+
   jq -n --arg reason "TOML/schema lint errors in $FILE_PATH:
 $LINT_OUTPUT" \
     '{"decision":"block","reason":$reason}'
