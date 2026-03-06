@@ -103,6 +103,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    - Maintain POSIX standard (empty line at end, no trailing whitespace)
 
 4. **Validate after editing**:
+   If you suspect TOML syntax issues after editing, run `mthds-agent plxt lint <file>.mthds` for a quick check before the heavier semantic validation. Then validate:
    ```bash
    mthds-agent pipelex validate bundle <file>.mthds -L <bundle-dir>/
    ```

@@ -271,5 +271,7 @@ Graph files (`live_run.html` / `dry_run.html`) are written to disk next to the b
 | `mthds-agent package init` | Initialize METHODS.toml | `mthds-agent package init --address github.com/org/repo --version 1.0.0 --description "desc" -C <pkg-dir>` |
 | `mthds-agent package list` | Display package manifest | `mthds-agent package list -C <pkg-dir>` |
 | `mthds-agent package validate` | Validate METHODS.toml package manifest | `mthds-agent package validate -C <pkg-dir>` |
+| `mthds-agent plxt lint` | Lint `.mthds`/`.toml` files for TOML syntax and schema errors (passthrough to plxt — raw text output on stderr, not JSON) | `mthds-agent plxt lint <file>.mthds` |
+| `mthds-agent plxt fmt` | Auto-format `.mthds`/`.toml` files (passthrough to plxt — raw text output on stderr, not JSON) | `mthds-agent plxt fmt <file>.mthds` |
 
 > **Note**: All commands accept the `--log-level` global option before the subcommand (see [Global Options](#global-options)).

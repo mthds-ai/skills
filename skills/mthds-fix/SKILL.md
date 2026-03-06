@@ -75,7 +75,9 @@ For error type descriptions, see [Error Handling — Validation Error Types](../
 
 ### Step 3: Fix TOML Formatting Issues
 
-These aren't always reported by validation but cause problems:
+After applying semantic fixes, run `mthds-agent plxt fmt <file>.mthds` to auto-format the file. Then run `mthds-agent plxt lint <file>.mthds` as a quick TOML/schema correctness check before the full semantic re-validation in Step 4.
+
+Beyond what plxt catches, watch for these common issues:
 
 **Multi-line inputs** — must be on a single line:
 ```toml
