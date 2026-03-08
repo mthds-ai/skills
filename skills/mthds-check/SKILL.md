@@ -46,7 +46,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    ```bash
    mthds-agent plxt lint <file>.mthds
    ```
-   If lint reports errors, include them in the final report (step 6) and continue — semantic validation in the next step may reveal additional issues.
+   If lint reports errors, include them in the final report and continue — semantic validation in the next step may reveal additional issues.
 
 3. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions):
    ```bash
