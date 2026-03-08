@@ -42,34 +42,40 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 
 1. **Read the .mthds file** — Load and parse the method
 
-2. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions):
+2. **Run plxt lint** — Catch TOML syntax and schema errors before semantic validation (this skill is read-only and never triggers the PostToolUse hook, so lint must be run explicitly):
+   ```bash
+   mthds-agent plxt lint <file>.mthds
+   ```
+   If lint reports errors, include them in the final report and continue — semantic validation in the next step may reveal additional issues.
+
+3. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions):
    ```bash
    mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/
    ```
 
-3. **Parse the JSON output**:
+4. **Parse the JSON output**:
    - If `success: true` — all pipes validated, report clean status
    - If error — see [Error Handling Reference](../shared/error-handling.md) for error types and recovery
 
-4. **Cross-domain validation** — when the bundle references pipes from other domains, use `--library-dir` (see [Error Handling — Cross-Domain](../shared/error-handling.md#cross-domain-validation))
+5. **Cross-domain validation** — when the bundle references pipes from other domains, use `--library-dir` (see [Error Handling — Cross-Domain](../shared/error-handling.md#cross-domain-validation))
 
-5. **Analyze for additional issues** (manual review beyond CLI validation):
+6. **Analyze for additional issues** (manual review beyond CLI validation):
    - Unused concepts (defined but never referenced)
    - Unreachable pipes (not in main_pipe execution path)
    - Missing descriptions on pipes or concepts
    - Inconsistent naming conventions
    - Potential prompt issues (missing variables, unclear instructions)
 
-6. **Report findings by severity**:
-   - **Errors**: Validation failures from CLI (with `error_type` and `pipe_code`)
+7. **Report findings by severity**:
+   - **Errors**: Validation failures from CLI (with `error_type` and `pipe_code`) and plxt lint errors
    - **Warnings**: Issues that may cause problems (e.g., model availability)
    - **Suggestions**: Improvements for maintainability
 
-7. **Do NOT make changes** — This skill is read-only
+8. **Do NOT make changes** — This skill is read-only
 
 ## What Gets Checked
 
-- TOML syntax validity
+- TOML syntax and schema validation (via `mthds-agent plxt lint`)
 - Concept definitions and references
 - Pipe type configurations
 - Input/output type matching
