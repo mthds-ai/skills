@@ -123,6 +123,12 @@ mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/
 
 Continue the fix-validate loop until `success: true` is returned. Some fixes reveal new issues — for example, fixing a `missing_input_variable` may expose an `input_stuff_spec_mismatch` on the newly added input.
 
+On the **final successful** validation, re-run with `--graph` to generate a flowchart:
+
+```bash
+mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/ --graph
+```
+
 If the fix-validate loop gets stuck or errors are unclear, re-run with `--log-level debug` for additional context:
 
 ```bash
@@ -134,6 +140,7 @@ mthds-agent --log-level debug pipelex validate bundle <file>.mthds -L <bundle-di
 - List all changes made (which pipes were modified and how)
 - Show the final validation result
 - Flag any remaining warnings or suggestions
+- Mention the generated `dry_run.html` flowchart next to the bundle
 
 ## Reference
 
