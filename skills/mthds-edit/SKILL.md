@@ -118,12 +118,12 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    - Provide a concrete CLI example. If `inputs.json` contains placeholder values, suggest the safe dry-run command first:
      > To try the updated method now, use /mthds-run or from the terminal:
      > ```
-     > mthds run pipe <bundle-dir>/ --dry-run --mock-inputs
+     > mthds run bundle <bundle-dir>/ --dry-run --mock-inputs
      > ```
      >
      > To run with real data, use /mthds-inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
      > ```
-     > mthds run pipe <bundle-dir>/
+     > mthds run bundle <bundle-dir>/
      > ```
 
 ## Common Edit Operations
@@ -140,4 +140,4 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
 - [MTHDS Agent Guide](../shared/mthds-agent-guide.md) — read for CLI command syntax or output format details
 - [MTHDS Language Reference](../shared/mthds-reference.md) — read when writing or modifying .mthds TOML syntax
 - [Native Content Types](../shared/native-content-types.md) — read when using `$var.field` in prompts or `from` in construct blocks, to know which attributes each native concept exposes
-- [Talents & Presets](references/talents-and-presets.md) — read when setting or changing the `model` field in a pipe, to find the correct preset name
+- [Talents & Presets](references/talents-and-presets.md) — read when setting or changing talent fields in a pipe. Use talent names (left column, e.g., `creative-writer`), not preset names (right column, e.g., `$writing-creative`)

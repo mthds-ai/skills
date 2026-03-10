@@ -2,10 +2,12 @@
 
 The agent CLI uses human-friendly "talent" names that map to model presets. This shields you from needing to know specific model names.
 
+> **IMPORTANT**: When using the agent CLI (`mthds-agent pipelex pipe`), always use **Talent** names (left column), never preset names (right column). Presets are internal identifiers — the CLI maps talents to presets automatically.
+
 > **Check availability**: Run `mthds-agent pipelex models` to verify which presets, aliases, and talent mappings are actually available in the current environment before referencing them in a bundle.
 > Use `--type` (`llm`, `extract`, `img_gen`, `search`) to filter by category and `--backend` to filter by provider.
 
-## LLM Talents → Model Presets
+## LLM Talents → Model Presets (reference only)
 
 | Talent | Model Preset |
 |--------|--------------|
@@ -19,7 +21,9 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 | `vision-language-model` | `$vision` |
 | `visual-designer` | `$img-gen-prompting` |
 
-## Extract Talents → Model Presets
+> **Common mistake**: Using `writing-creative` (a preset name) instead of `creative-writer` (the correct talent name). Always pick from the **Talent** column.
+
+## Extract Talents → Model Presets (reference only)
 
 | Talent | Model Preset |
 |--------|--------------|
@@ -27,7 +31,7 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 | `image-text-extractor` | `@default-extract-image` |
 | `full-document-extractor` | `@default-extract-document` |
 
-## Image Generation Talents → Model Presets
+## Image Generation Talents → Model Presets (reference only)
 
 | Talent | Model Preset |
 |--------|--------------|
@@ -35,7 +39,7 @@ The agent CLI uses human-friendly "talent" names that map to model presets. This
 | `gen-image-fast` | `$gen-image-fast` |
 | `gen-image-high-quality` | `$gen-image-high-quality` |
 
-## Search Talents → Model Presets
+## Search Talents → Model Presets (reference only)
 
 | Talent | Model Preset |
 |--------|--------------|

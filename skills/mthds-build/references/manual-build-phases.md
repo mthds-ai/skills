@@ -79,6 +79,14 @@ Detailed examples, ASCII diagrams, and CLI commands for each phase of the manual
 
 ## Phase 7: Pipe Type CLI Examples
 
+> **JSON spec field names** (use exactly these in `--spec` JSON):
+> - `type` — pipe type (e.g. `"PipeLLM"`, NOT `"pipe_type"`)
+> - `pipe_code` — unique pipe identifier (NOT `"the_pipe_code"` or `"code"`)
+> - `llm_talent` — talent field for PipeLLM (NOT `"talent_name"` or `"talent"`)
+> - `extract_talent` — talent field for PipeExtract
+> - `img_gen_talent` — talent field for PipeImgGen
+> - `search_talent` — talent field for PipeSearch
+
 ### PipeLLM
 ```bash
 mthds-agent pipelex pipe --spec '{
@@ -214,6 +222,8 @@ mthds-agent pipelex pipe --spec '{
   "prompt": "$img_prompt"
 }'
 ```
+
+> **Note**: The `prompt` field is **required** for PipeImgGen. It is a template that defines the text sent to the image generation model. Use `$variable` syntax to insert inputs. Examples: `"prompt": "$img_prompt"` (direct passthrough) or `"prompt": "A black and white sketch of $description"` (template with added context). Even if your input already contains the full prompt, you must still declare the `prompt` field.
 
 ### PipeSearch
 ```bash

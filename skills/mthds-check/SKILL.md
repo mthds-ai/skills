@@ -48,9 +48,9 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    ```
    If lint reports errors, include them in the final report and continue — semantic validation in the next step may reveal additional issues.
 
-3. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions):
+3. **Run CLI validation** (use `-L` pointing to the bundle's own directory to avoid namespace collisions; `--graph` generates a flowchart):
    ```bash
-   mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/
+   mthds-agent pipelex validate bundle <file>.mthds -L <bundle-directory>/ --graph
    ```
 
 4. **Parse the JSON output**:
@@ -70,6 +70,7 @@ Do not write `.mthds` files manually, do not scan for existing methods, do not d
    - **Errors**: Validation failures from CLI (with `error_type` and `pipe_code`) and plxt lint errors
    - **Warnings**: Issues that may cause problems (e.g., model availability)
    - **Suggestions**: Improvements for maintainability
+   - **Flowchart**: If validation succeeded, mention the generated `dry_run.html` flowchart next to the bundle
 
 8. **Do NOT make changes** — This skill is read-only
 

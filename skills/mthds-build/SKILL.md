@@ -246,6 +246,12 @@ items = {type = "list", item_type = "concept", item_concept_ref = "my_domain.Oth
 | **PipeSearch** | Search the web for information → SearchResult |
 | **PipeFunc** | Custom Python logic |
 
+> **Critical — PipeImgGen requires a `prompt` field**: The `prompt` field is **required** for PipeImgGen. It is a template that defines the text sent to the image generation model — use `$variable` syntax to insert inputs. Examples:
+> - Direct passthrough: `prompt = "$img_prompt"` — uses the input as-is
+> - Template with context: `prompt = "A black and white sketch of $description"` — wraps the input in a richer prompt
+>
+> Even if the input already contains the full prompt text, you must still declare the `prompt` field. Without it, validation fails with `missing required fields: 'prompt'`.
+
 > **Note**: `Page[]` outputs from PipeExtract automatically convert to text when inserted into prompts using `@variable`.
 
 **Show detailed ASCII flow** — see [Manual Build Phases](references/manual-build-phases.md#phase-5-controller-flow-diagrams) for all controller flow diagrams.
@@ -265,7 +271,8 @@ Check:
 - [ ] PipeBatch branches receive singular items, not lists
 - [ ] PipeBatch: `input_item_name` (singular) differs from `input_list_name` (plural) and all `inputs` keys
 - [ ] PipeSequence batch steps: `batch_as` (singular) differs from `batch_over` (plural)
-- [ ] PipeImgGen inputs are text (add PipeLLM if needed to generate prompt)
+- [ ] PipeImgGen has a `prompt` field (template that references inputs, e.g., `prompt = "$description"` or `prompt = "A watercolor painting of $subject"`) — required even when the input IS the prompt
+- [ ] PipeImgGen inputs are text-compatible (add PipeLLM if needed to craft the prompt first)
 - [ ] No circular dependencies
 
 **Confirm with user** before proceeding to structuring.
@@ -276,7 +283,7 @@ Check:
 
 **Goal**: Convert pipe drafts to validated TOML using the CLI.
 
-Default to talent names from [Talents and Presets](references/talents-and-presets.md). Only look up specific model presets when the user has explicit instructions about model choice. In all cases, verify that referenced presets exist:
+Use **talent names** (left column) from [Talents and Presets](references/talents-and-presets.md). Do NOT use model preset names (right column, prefixed with `$` or `@`) — those are internal identifiers. For example, use `creative-writer`, not `writing-creative` or `$writing-creative`. Only look up specific model presets when the user has explicit instructions about model choice. In all cases, verify that referenced presets exist:
 ```bash
 mthds-agent pipelex models --type llm          # when structuring PipeLLM pipes
 mthds-agent pipelex models --type extract      # when structuring PipeExtract pipes
@@ -285,6 +292,10 @@ mthds-agent pipelex models --type search       # when structuring PipeSearch pip
 ```
 
 Prepare JSON specs for all pipes, then convert them **in parallel** by making multiple concurrent tool calls.
+
+> **Exact field names for `--spec` JSON**: `type` (not `pipe_type`), `pipe_code` (not `the_pipe_code`), and the talent field matching the pipe type: `llm_talent` for PipeLLM, `extract_talent` for PipeExtract, `img_gen_talent` for PipeImgGen, `search_talent` for PipeSearch. Do NOT use generic names like `talent_name`.
+
+> **PipeImgGen `prompt` is required**: The `prompt` field must be included in the `--spec` JSON. It is a template — use `$variable` to insert inputs. Examples: `"prompt": "$img_prompt"` (passthrough) or `"prompt": "A black and white sketch of $description"` (template with context). Omitting `prompt` causes a validation error.
 
 For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, PipeCondition, PipeCompose, PipeParallel, PipeExtract, PipeImgGen, PipeSearch), see [Manual Build Phases](references/manual-build-phases.md#phase-7-pipe-type-cli-examples).
 
@@ -330,15 +341,14 @@ For additional examples, see [Manual Build Phases](references/manual-build-phase
 Always use `-L` pointing to the bundle's own directory to avoid namespace collisions with other bundles in the project.
 
 ```bash
-# Validate (isolated from other bundles)
-mthds-agent pipelex validate bundle mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
+# Validate and generate flowchart (isolated from other bundles)
+mthds-agent pipelex validate bundle mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/ --graph
 
 # Generate example inputs
 mthds-agent pipelex inputs bundle mthds-wip/pipeline_01/bundle.mthds -L mthds-wip/pipeline_01/
-
-# Dry run (directory mode: auto-detects bundle, inputs, library dir)
-mthds-agent pipelex run bundle mthds-wip/pipeline_01/ --dry-run --mock-inputs
 ```
+
+On success, `dry_run.html` is saved next to the bundle. The JSON output includes the path in `graph_files`.
 
 Fix any validation errors and re-validate. If validation fails unexpectedly or errors are unclear, re-run with `--log-level debug` for additional context:
 
@@ -367,16 +377,18 @@ After the command succeeds:
 
 1. **Input template**: Show the `inputs` JSON from the inputs command output. Save it to `<output_dir>/inputs.json` for the user to fill in.
 
-2. **Next steps — try it now**: If the method requires inputs, the saved `inputs.json` still contains placeholder values, so suggest a dry run first:
-   > To try this method right now, use /mthds-run or from the terminal:
+2. **Flowchart**: Tell the user that an interactive flowchart (`dry_run.html`) was generated during validation next to the bundle.
+
+3. **Next steps — test with mock inference**: If the method requires inputs, the saved `inputs.json` still contains placeholder values, so suggest a dry run to test with mock inference:
+   > To test this method with mock inference, use /mthds-run or from the terminal:
    > ```
-   > mthds run pipe <output_dir>/ --dry-run --mock-inputs
+   > mthds run bundle <output_dir>/ --dry-run --mock-inputs
    > ```
 
-3. **Next steps — run with real data**: Explain how to prepare real inputs, then run for real:
+4. **Next steps — run with real data**: Explain how to prepare real inputs, then run for real:
    > To run with real data, use /mthds-inputs to prepare your inputs (provide your own files, or generate synthetic test data), then:
    > ```
-   > mthds run pipe <output_dir>/
+   > mthds run bundle <output_dir>/
    > ```
 
    Replace `<output_dir>` with the actual output directory path used throughout the build.
