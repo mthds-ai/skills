@@ -300,9 +300,26 @@ For detailed CLI examples for each pipe type (PipeLLM, PipeSequence, PipeBatch, 
 
 **Save location**: Always save method bundles to `mthds-wip/`. Do not ask the user for the save location.
 
-Call assemble to get the TOML in the JSON response (in the `toml` field). Then save it using the **Write** tool to `mthds-wip/<bundle_dir>/bundle.mthds` — this triggers the PostToolUse hook for automatic lint/format/validate.
+**Procedure**:
 
-For the assemble CLI command and direct .mthds writing examples, see [Manual Build Phases](references/manual-build-phases.md#phase-8-assemble-bundle).
+1. **Create the output directory**: `mkdir -p mthds-wip/<bundle_dir>/`
+2. **Save concept TOML** from Phase 4 to `mthds-wip/<bundle_dir>/concepts.toml` using the **Write** tool
+3. **Save pipe TOML** from Phase 7 to `mthds-wip/<bundle_dir>/pipes.toml` using the **Write** tool
+4. **Run assemble** with file paths (not inline content):
+   ```bash
+   mthds-agent pipelex assemble \
+     --domain <domain> \
+     --main-pipe <main_pipe_code> \
+     --description "<description>" \
+     --concepts mthds-wip/<bundle_dir>/concepts.toml \
+     --pipes mthds-wip/<bundle_dir>/pipes.toml
+   ```
+5. **Parse the `toml` field** from the JSON response and save it using the **Write** tool to `mthds-wip/<bundle_dir>/bundle.mthds` — this triggers the PostToolUse hook for automatic lint/format/validate.
+6. **Clean up** the intermediate files (`concepts.toml`, `pipes.toml`) — they are no longer needed.
+
+**IMPORTANT**: Never pass TOML content inline via process substitution or heredocs. Always write to files first, then pass file paths to the CLI.
+
+For additional examples, see [Manual Build Phases](references/manual-build-phases.md#phase-8-assemble-bundle).
 
 ---
 
