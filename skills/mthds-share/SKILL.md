@@ -1,6 +1,6 @@
 ---
 name: mthds-share
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Share MTHDS methods on social media (X/Twitter, Reddit, LinkedIn). Use when user says "share this method", "post on social media", "share on X", "share on Reddit", "share on LinkedIn", "tweet about this method", or wants to share a published method on social platforms.
 ---
 

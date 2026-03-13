@@ -1,6 +1,6 @@
 ---
 name: mthds-pkg
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Manage MTHDS packages — initialize, configure exports, list, and validate. Use when user says "init package", "set up METHODS.toml", "manage packages", "mthds init", "validate package", "list package", or wants to manage MTHDS package manifests.
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: mthds-check
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Check and validate MTHDS bundles for issues. Use when user says "validate this", "check my workflow", "check my method", "does this .mthds make sense?", "review this pipeline", "any issues?", "is this correct?". Reports problems without modifying files. Read-only analysis.
 ---
 

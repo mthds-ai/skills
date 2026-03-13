@@ -1,6 +1,6 @@
 ---
 name: pipelex-setup
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Set up Pipelex inference configuration — choose backends and configure API keys. Use when user says "set up pipelex", "configure backends", "configure inference", "set up API keys", "pipelex setup", "pipelex init", wants to run methods for the first time, or gets a config/credential error when running.
 ---
 

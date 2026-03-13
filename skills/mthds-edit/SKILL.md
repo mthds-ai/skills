@@ -1,6 +1,6 @@
 ---
 name: mthds-edit
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Edit existing MTHDS bundles (.mthds files). Use when user says "change this pipe", "update the prompt", "rename this concept", "add a step", "remove this pipe", "modify the workflow", "modify the method", "refactor this pipeline", or wants any modification to an existing .mthds file. Supports automatic mode for clear changes and interactive mode for complex modifications.
 ---
 

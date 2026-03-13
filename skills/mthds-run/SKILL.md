@@ -1,6 +1,6 @@
 ---
 name: mthds-run
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Run MTHDS methods and interpret results. Use when user says "run this pipeline", "execute the workflow", "execute the method", "test this .mthds file", "try it out", "see the output", "dry run", or wants to execute any MTHDS method bundle and see its output.
 ---
 
