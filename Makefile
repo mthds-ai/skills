@@ -63,7 +63,7 @@ check: ## Verify shared refs, shared files, and version consistency
 	fail=0; \
 	for skill in skills/*/SKILL.md; do \
 		while IFS= read -r line; do \
-			ver=$$(echo "$$line" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+'); \
+			ver=$$(echo "$$line" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || true); \
 			if [ -n "$$ver" ] && [ "$$ver" != "$$canonical" ]; then \
 				echo "  MISMATCH: $$skill body text has $$ver, expected $$canonical (line: $$line)"; \
 				fail=1; \
