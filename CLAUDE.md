@@ -37,12 +37,19 @@ Each skill directory contains a `SKILL.md`. Shared reference docs live in `skill
 
 ```bash
 make help        # Show available targets
-make check       # Verify shared refs use ../shared/ paths and all shared files exist
+make check       # Verify shared refs, shared files, and version consistency
+make test        # Run unit tests (sets up venv via uv)
+make env         # Create virtual environment
+make install     # Install dev dependencies
 ```
 
-**`make check`** verifies that:
+**`make check`** runs `scripts/check.py` (no venv needed — uses system `python3`) and verifies that:
 1. No SKILL.md files contain stale `references/` paths to shared files (should use `../shared/` instead).
 2. All 4 shared files exist in `skills/shared/`.
+3. All `min_mthds_version` frontmatter values in SKILL.md files match the canonical version in `mthds-agent-guide.md`.
+4. All body-text version references in Step 0 sections match the canonical version.
+
+**`make test`** runs pytest against `tests/` using a uv-managed venv.
 
 ## PostToolUse Hook
 
