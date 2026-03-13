@@ -48,5 +48,23 @@ check: ## Verify shared refs, shared files, and version consistency
 		echo "FAIL: Version inconsistency detected (canonical: $$canonical from $(SHARED)/mthds-agent-guide.md)"; \
 		exit 1; \
 	fi
-	@echo "  All versions consistent."
+	@echo "  All frontmatter versions consistent."
+	@echo "Checking body-text version references in Step 0 sections..."
+	@canonical=$$(grep -oE 'mthds-agent >= [0-9]+\.[0-9]+\.[0-9]+' $(SHARED)/mthds-agent-guide.md | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') || \
+		{ echo "FAIL: Cannot extract canonical version from $(SHARED)/mthds-agent-guide.md"; exit 1; }; \
+	fail=0; \
+	for skill in skills/*/SKILL.md; do \
+		while IFS= read -r line; do \
+			ver=$$(echo "$$line" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+'); \
+			if [ -n "$$ver" ] && [ "$$ver" != "$$canonical" ]; then \
+				echo "  MISMATCH: $$skill body text has $$ver, expected $$canonical (line: $$line)"; \
+				fail=1; \
+			fi; \
+		done < <(grep -E '(minimum required version is \*\*|version is below |version .* or higher)' "$$skill"); \
+	done; \
+	if [ $$fail -eq 1 ]; then \
+		echo "FAIL: Body-text version mismatch detected (canonical: $$canonical from $(SHARED)/mthds-agent-guide.md)"; \
+		exit 1; \
+	fi
+	@echo "  All body-text versions consistent."
 	@echo "All checks passed."
