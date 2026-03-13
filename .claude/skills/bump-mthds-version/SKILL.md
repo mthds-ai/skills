@@ -42,7 +42,7 @@ For each file matching `skills/*/SKILL.md`, replace all 5 occurrences of the old
 
 ### 4. Verify with grep
 
-Run `grep -rc 'OLD' skills/*/SKILL.md` (replacing `OLD` with the actual old version string). Every file must return `:0`. If any file still contains the old version, fix it before continuing.
+Run `grep -rc 'OLD' skills/*/SKILL.md skills/shared/mthds-agent-guide.md` (replacing `OLD` with the actual old version string). Every file must return `:0`. If any file still contains the old version, fix it before continuing.
 
 ### 5. Verify with `make check`
 

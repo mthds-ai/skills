@@ -33,6 +33,14 @@ check: ## Verify shared refs, shared files, and version consistency
 	@echo "Checking min_mthds_version consistency..."
 	@canonical=$$(grep -oE 'mthds-agent >= [0-9]+\.[0-9]+\.[0-9]+' $(SHARED)/mthds-agent-guide.md | grep -oE '[0-9]+\.[0-9]+\.[0-9]+') || \
 		{ echo "FAIL: Cannot extract canonical version from $(SHARED)/mthds-agent-guide.md"; exit 1; }; \
+	guide_versions=$$(sed -n '3p' $(SHARED)/mthds-agent-guide.md | grep -oE '[0-9]+\.[0-9]+\.[0-9]+'); \
+	for v in $$guide_versions; do \
+		if [ "$$v" != "$$canonical" ]; then \
+			echo "  MISMATCH: $(SHARED)/mthds-agent-guide.md has $$v, expected $$canonical"; \
+			echo "FAIL: Internal version inconsistency in $(SHARED)/mthds-agent-guide.md"; \
+			exit 1; \
+		fi; \
+	done; \
 	fail=0; \
 	for skill in skills/*/SKILL.md; do \
 		ver=$$(sed -n '/^---$$/,/^---$$/{ s/^min_mthds_version: *//p; }' "$$skill"); \
