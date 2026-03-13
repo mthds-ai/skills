@@ -1,0 +1,23 @@
+.github/workflows/guard-branches.yml
+  09ea1b704e202894 36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "c069b01377b2b4b667857d2eb839a7064049741c",
+  "prompts": {
+    "09ea1b704e202894": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "609e0ae8-4630-4eb1-b426-e0268dfb0a16",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
