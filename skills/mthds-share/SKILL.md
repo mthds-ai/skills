@@ -1,6 +1,6 @@
 ---
 name: mthds-share
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Share MTHDS methods on social media (X/Twitter, Reddit, LinkedIn). Use when user says "share this method", "post on social media", "share on X", "share on Reddit", "share on LinkedIn", "tweet about this method", or wants to share a published method on social platforms.
 ---
 
@@ -12,7 +12,7 @@ Generate share URLs for method packages and open them in the browser. Supports X
 
 ### Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.1.2** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -24,9 +24,9 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.1.2**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.1.2 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -34,7 +34,7 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is 0.1.0 or higher**: proceed to the next step.
+- **If the version is 0.1.2 or higher**: proceed to the next step.
 
 ### Step 1: Ask the User
 

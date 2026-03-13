@@ -1,6 +1,6 @@
 ---
 name: pipelex-setup
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Set up Pipelex inference configuration — choose backends and configure API keys. Use when user says "set up pipelex", "configure backends", "configure inference", "set up API keys", "pipelex setup", "pipelex init", wants to run methods for the first time, or gets a config/credential error when running.
 ---
 
@@ -12,7 +12,7 @@ Guided setup for configuring the Pipelex runtime with inference backends and API
 
 ### Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.1.2** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -24,9 +24,9 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.1.2**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.1.2 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -34,7 +34,7 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is 0.1.0 or higher**: proceed to the next step.
+- **If the version is 0.1.2 or higher**: proceed to the next step.
 
 ### Step 1 — Check Pipelex Runtime
 

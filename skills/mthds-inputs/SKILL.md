@@ -1,6 +1,6 @@
 ---
 name: mthds-inputs
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Prepare inputs for MTHDS methods. Use when user says "prepare inputs", "create inputs", "use my files", "generate test data", "template", "synthesize inputs", "mock inputs", "I have a PDF/image/document to use", "make sample data", or wants to create inputs.json for running a .mthds pipeline. Handles user-provided files, synthetic data generation, placeholder templates, and mixed approaches. Defaults to automatic mode.
 ---
 
@@ -62,7 +62,7 @@ Prepare input data for running MTHDS method bundles. This skill is the single en
 
 ## Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.1.2** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -74,9 +74,9 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.1.2**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.1.2 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -84,7 +84,7 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is 0.1.0 or higher**: proceed to the next step.
+- **If the version is 0.1.2 or higher**: proceed to the next step.
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 

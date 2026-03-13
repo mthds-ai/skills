@@ -1,0 +1,23 @@
+[project]
+name = "mthds-skills-tools"
+# Internal tooling version — not tied to the plugin version in plugin.json/marketplace.json.
+# This package is not published; bump only when the tooling itself changes meaningfully.
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0,<9.0.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.hatch.build.targets.wheel]
+packages = ["scripts"]
+
+[tool.uv]
+required-version = ">=0.7.2"

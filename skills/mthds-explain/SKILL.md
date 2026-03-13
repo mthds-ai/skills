@@ -1,6 +1,6 @@
 ---
 name: mthds-explain
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Explain and document MTHDS bundles. Use when user says "what does this pipeline do?", "explain this workflow", "explain this method", "walk me through this .mthds file", "describe the flow", "document this pipeline", "how does this work?", or wants to understand an existing MTHDS method bundle.
 ---
 
@@ -12,7 +12,7 @@ Analyze and explain existing MTHDS method bundles in plain language.
 
 ### Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.1.2** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -24,9 +24,9 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.1.2**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.1.2 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -34,7 +34,7 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is 0.1.0 or higher**: proceed to the next step.
+- **If the version is 0.1.2 or higher**: proceed to the next step.
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 

@@ -1,6 +1,6 @@
 ---
 name: mthds-build
-min_mthds_version: 0.1.0
+min_mthds_version: 0.1.2
 description: Build new AI method from scratch using the MTHDS standard (.mthds bundle files). Use when user says "create a pipeline", "build a workflow", "new .mthds file", "make a method", "design a pipe", or wants to create any new method from scratch. Guides the user through a 10-phase construction process.
 ---
 
@@ -60,7 +60,7 @@ Create new MTHDS bundles through an adaptive, phase-based approach. This skill g
 
 ## Step 0 — CLI Check (mandatory, do this FIRST)
 
-Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared in this skill's front matter as `min_mthds_version`).
+Run `mthds-agent --version`. The minimum required version is **0.1.2** (declared in this skill's front matter as `min_mthds_version`).
 
 - **If the command is not found**: STOP. Do not proceed. Tell the user:
 
@@ -72,9 +72,9 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is below 0.1.0**: STOP. Do not proceed. Tell the user:
+- **If the version is below 0.1.2**: STOP. Do not proceed. Tell the user:
 
-> This skill requires `mthds-agent` version 0.1.0 or higher (found *X.Y.Z*). Upgrade with:
+> This skill requires `mthds-agent` version 0.1.2 or higher (found *X.Y.Z*). Upgrade with:
 >
 > ```
 > npm install -g mthds@latest
@@ -82,7 +82,7 @@ Run `mthds-agent --version`. The minimum required version is **0.1.0** (declared
 >
 > Then re-run this skill.
 
-- **If the version is 0.1.0 or higher**: proceed to the next step.
+- **If the version is 0.1.2 or higher**: proceed to the next step.
 
 Do not write `.mthds` files manually, do not scan for existing methods, do not do any other work. The CLI is required for validation, formatting, and execution — without it the output will be broken.
 
@@ -405,7 +405,10 @@ After the command succeeds:
 ### Prompt Variables
 - `@variable` - Block insertion (multi-line, with delimiters)
 - `$variable` - Inline insertion (short text)
-- `$var.field` - Access nested field
+- `@?variable` - Conditional block insertion (only renders if variable is truthy)
+- `$var.field` - Access nested field (dotted paths work with all three patterns)
+- Raw Jinja2 `{{ }}` / `{% %}` also supported
+- These work in PipeLLM, PipeImgGen, PipeSearch, and PipeCompose templates
 
 ### Naming Conventions
 - **Domain**: `snake_case`
