@@ -1,0 +1,31 @@
+tests/unit/test_check.py
+  1e869fa54e802778 122-127
+.github/workflows/guard-branches.yml
+  1e869fa54e802778 5
+scripts/check.py
+  1e869fa54e802778 77-81,84-88,90
+Makefile
+  1e869fa54e802778 26-30,47-51
+.github/workflows/tests.yml
+  1e869fa54e802778 19-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "187bdcbe0cf7e17f0ddd1f2674ea842226fdee7d",
+  "prompts": {
+    "1e869fa54e802778": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "564d9055-d071-4db1-a720-63f6d5019c11",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 34,
+      "total_deletions": 17,
+      "accepted_lines": 32,
+      "overriden_lines": 0
+    }
+  }
+}
