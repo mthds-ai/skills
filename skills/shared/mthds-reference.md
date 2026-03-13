@@ -295,6 +295,40 @@ customer_name = { from = "customer.name" }
 total = { from = "order.total" }
 ```
 
+#### Template Shorthand Syntax
+
+| Shorthand | Jinja2 Expansion | Use |
+|-----------|-----------------|-----|
+| `$variable` | `{{ variable|format() }}` | Inline substitution within a sentence |
+| `@variable` | `{{ variable|tag("variable") }}` | Block insertion as a standalone tagged block |
+| `@?variable` | `{% if variable %}{{ variable|tag("variable") }}{% endif %}` | Conditional — renders only if truthy |
+
+- Dotted paths: `$user.name`, `@doc.summary`, `@?extra.notes`
+- Dollar amounts (`$100`) are NOT matched — must start with a letter/underscore
+- Trailing dots treated as punctuation: `$amount.` → `{{ amount|format() }}.`
+- Raw Jinja2 (`{{ }}`, `{% %}`) always available alongside shorthands
+
+#### Template Categories
+
+| Category | Use When | Key Filters |
+|----------|----------|-------------|
+| `basic` | General-purpose text | `format`, `tag` |
+| `expression` | Simple expressions | *(none)* |
+| `html` | Web content (autoescaped) | `format`, `tag`, `escape_script_tag` |
+| `markdown` | Markdown output | `format`, `tag`, `escape_script_tag` |
+| `mermaid` | Mermaid diagrams | *(none)* |
+| `llm_prompt` | LLM prompt composition | `format`, `tag`, `with_images` |
+| `img_gen_prompt` | Image generation prompts | `format`, `tag`, `with_images` |
+
+#### Template vs Construct Mode
+
+| | Template Mode | Construct Mode |
+|---|---|---|
+| **Use when** | Producing text output (prompts, reports, emails) | Building structured objects field-by-field |
+| **Output type** | Typically `Text`, `Html`, or similar | Structured concepts with fields |
+| **Syntax** | Jinja2 template with `$`/`@`/`@?` shorthand | `{ from = "..." }`, `{ template = "..." }`, or literals |
+| **Category** | Set via `category` field | N/A |
+
 **Construct field methods:**
 | Method | Syntax | Use case |
 |--------|--------|----------|

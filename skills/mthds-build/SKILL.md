@@ -405,7 +405,10 @@ After the command succeeds:
 ### Prompt Variables
 - `@variable` - Block insertion (multi-line, with delimiters)
 - `$variable` - Inline insertion (short text)
-- `$var.field` - Access nested field
+- `@?variable` - Conditional block insertion (only renders if variable is truthy)
+- `$var.field` - Access nested field (dotted paths work with all three patterns)
+- Raw Jinja2 `{{ }}` / `{% %}` also supported
+- These work in PipeLLM, PipeImgGen, PipeSearch, and PipeCompose templates
 
 ### Naming Conventions
 - **Domain**: `snake_case`
