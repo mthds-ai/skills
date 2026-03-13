@@ -1,0 +1,25 @@
+Makefile
+  16bcca98473b76d8 36-43
+.claude/skills/bump-mthds-version/SKILL.md
+  16bcca98473b76d8 45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "c9c266094f34cf4b5191938c4bca6b771519cde7",
+  "prompts": {
+    "16bcca98473b76d8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1613ba7b-1d5e-483d-81fc-b3f557e27334",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 1,
+      "accepted_lines": 9,
+      "overriden_lines": 0
+    }
+  }
+}
