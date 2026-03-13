@@ -1,0 +1,23 @@
+Makefile
+  6afe4eea9f2dd47f 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "c6dc07dca5e7316b50ec3eaf98591b6c2ebdf826",
+  "prompts": {
+    "6afe4eea9f2dd47f": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d17bf815-511d-45f2-a2ee-ba2d1ea8dd28",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0
+    }
+  }
+}
