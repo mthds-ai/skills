@@ -2,7 +2,7 @@ name: Guard branch flow
 
 on:
   pull_request_target:
-    types: [opened, reopened]
+    types: [opened, edited, reopened]
 
 jobs:
   # Version in release/vX.Y.Z refers to the plugin version (.claude-plugin/plugin.json),

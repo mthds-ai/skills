@@ -119,6 +119,12 @@ class TestCanonicalVersion:
         with pytest.raises(ValueError, match="Cannot extract canonical version"):
             get_canonical_version(skill_tree)
 
+    def test_raises_on_truncated_guide(self, skill_tree: Path) -> None:
+        guide = skill_tree / "skills" / "shared" / "mthds-agent-guide.md"
+        guide.write_text("# MTHDS Agent Guide\nRequires `mthds-agent >= 0.1.2`.\n")
+        with pytest.raises(ValueError, match="only 2 line"):
+            get_canonical_version(skill_tree)
+
     def test_raises_on_line3_mismatch(self, skill_tree: Path) -> None:
         guide = skill_tree / "skills" / "shared" / "mthds-agent-guide.md"
         guide.write_text(

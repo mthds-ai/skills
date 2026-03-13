@@ -74,17 +74,21 @@ def get_canonical_version(base_dir: Path) -> str:
 
     # Validate line 3 consistency (all semver strings on that line must match)
     lines = text.splitlines()
-    if len(lines) >= 3:
-        line3_versions = SEMVER_PATTERN.findall(lines[2])
-        if not line3_versions:
+    if len(lines) < 3:
+        raise ValueError(
+            f"{guide.relative_to(base_dir)} has only {len(lines)} line(s), expected at least 3"
+        )
+
+    line3_versions = SEMVER_PATTERN.findall(lines[2])
+    if not line3_versions:
+        raise ValueError(
+            f"Cannot extract version(s) from line 3 of {guide.relative_to(base_dir)}"
+        )
+    for v in line3_versions:
+        if v != canonical:
             raise ValueError(
-                f"Cannot extract version(s) from line 3 of {guide.relative_to(base_dir)}"
+                f"{guide.relative_to(base_dir)} line 3 has {v}, expected {canonical}"
             )
-        for v in line3_versions:
-            if v != canonical:
-                raise ValueError(
-                    f"{guide.relative_to(base_dir)} line 3 has {v}, expected {canonical}"
-                )
 
     return canonical
 

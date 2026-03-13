@@ -23,8 +23,11 @@ check: ## Verify shared refs, shared files, and version consistency
 agent-check: ## Run checks quietly (output only on failure)
 	@echo "• Running checks..."
 	@tmpfile=$$(mktemp); \
-	python3 scripts/check.py > "$$tmpfile" 2>&1; \
-	exit_code=$$?; \
+	if python3 scripts/check.py > "$$tmpfile" 2>&1; then \
+		exit_code=0; \
+	else \
+		exit_code=$$?; \
+	fi; \
 	if [ $$exit_code -ne 0 ]; then cat "$$tmpfile"; fi; \
 	rm -f "$$tmpfile"; \
 	if [ $$exit_code -eq 0 ]; then echo "• All checks passed."; fi; \
@@ -41,8 +44,11 @@ gha-tests: install ## Run tests for GitHub Actions (exit on first failure, quiet
 agent-test: install ## Run unit tests quietly (output only on failure)
 	@echo "• Running unit tests..."
 	@tmpfile=$$(mktemp); \
-	$(VENV_PYTEST) -o log_level=WARNING --tb=short -q > "$$tmpfile" 2>&1; \
-	exit_code=$$?; \
+	if $(VENV_PYTEST) -o log_level=WARNING --tb=short -q > "$$tmpfile" 2>&1; then \
+		exit_code=0; \
+	else \
+		exit_code=$$?; \
+	fi; \
 	if [ $$exit_code -ne 0 ]; then cat "$$tmpfile"; fi; \
 	rm -f "$$tmpfile"; \
 	if [ $$exit_code -eq 0 ]; then echo "• All tests passed."; fi; \
