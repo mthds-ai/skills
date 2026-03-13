@@ -1,0 +1,52 @@
+pyproject.toml
+  c44879c17e3a03be 1-23
+.gitignore
+  c44879c17e3a03be 6-7
+scripts/check.py
+  c44879c17e3a03be 1-201
+.github/workflows/checks.yml
+  c44879c17e3a03be 1-22
+CLAUDE.md
+  c44879c17e3a03be 40-43,46,49-52
+.github/workflows/tests.yml
+  c44879c17e3a03be 1-26
+.github/workflows/guard-branches.yml
+  c44879c17e3a03be 1-39
+tests/unit/test_check.py
+  c44879c17e3a03be 1-201
+Makefile
+  c44879c17e3a03be 4-16,18,20-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "11064830b33aa529df6693b59eec3e7675ba8052",
+  "prompts": {
+    "b1a52729f5110525": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "a4253791-69e1-4f21-9b3c-aeb0dad435e0",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "c44879c17e3a03be": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "36f39d92-b1e4-4a49-bfb8-b9c87a567952",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Louis Choquel <lchoquel@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 580,
+      "total_deletions": 89,
+      "accepted_lines": 572,
+      "overriden_lines": 0
+    }
+  }
+}
