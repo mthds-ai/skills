@@ -64,7 +64,10 @@ check: ## Verify shared refs, shared files, and version consistency
 	for skill in skills/*/SKILL.md; do \
 		while IFS= read -r line; do \
 			ver=$$(echo "$$line" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || true); \
-			if [ -n "$$ver" ] && [ "$$ver" != "$$canonical" ]; then \
+			if [ -z "$$ver" ]; then \
+				echo "  MALFORMED: $$skill Step 0 line missing semver (line: $$line)"; \
+				fail=1; \
+			elif [ "$$ver" != "$$canonical" ]; then \
 				echo "  MISMATCH: $$skill body text has $$ver, expected $$canonical (line: $$line)"; \
 				fail=1; \
 			fi; \
